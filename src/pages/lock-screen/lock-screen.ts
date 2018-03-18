@@ -29,7 +29,6 @@ export class LockScreenPage {
       // Give a welcome to user and answer for new password
       else {
         this.presentAlert('PIN', "Para começar a usar a aplicação precisa de configurar um PIN de 6 digitos.", true)
-        this.openPinCode(true);
       }
     })
     .catch((error: any) => console.log(error))

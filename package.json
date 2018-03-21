@@ -31,7 +31,7 @@
     "@types/crypto-js": "^3.1.38",
     "cordova-android": "6.4.0",
     "cordova-browser": "5.0.3",
-    "cordova-ios": "4.5.4",
+    "cordova-ios": "^4.5.4",
     "cordova-plugin-add-swift-support": "^1.7.1",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-fingerprint-aio": "^1.3.4",
@@ -63,7 +63,9 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-touch-id": {},
-      "cordova-plugin-fingerprint-aio": {}
+      "cordova-plugin-fingerprint-aio": {
+        "FACEID_USAGE_DESCRIPTION": "Desbloqueie a aplicação...."
+      }
     },
     "platforms": [
       "browser",

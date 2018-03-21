@@ -1,8 +1,8 @@
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { PincodeController } from "ionic2-pincode-input/dist";
-import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
+import {FingerprintAIO, FingerprintOptions} from "@ionic-native/fingerprint-aio";
 
 import CryptoJS from 'crypto-js';
 import { Storage } from '@ionic/storage';
@@ -14,10 +14,18 @@ import { Storage } from '@ionic/storage';
 export class LockScreenPage {
 
   code: string;
+  faioOptions: FingerprintOptions
   //Fazer tentativas depois
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public pincodeCtrl: PincodeController,
-  private storage: Storage, private alertCtrl: AlertController, private faio: FingerprintAIO) {
+  private storage: Storage, private alertCtrl: AlertController, private faio: FingerprintAIO, private platform: Platform) {
+    this.faioOptions = {
+       clientId: 'Fingerprint-Demo',
+       clientSecret: 'password', //Only necessary for Android
+       disableBackup:true,  //Only for Android(optional)
+       localizedFallbackTitle: 'Use o Pin', //Only for iOS
+       localizedReason: 'Por favor authentique-se' //Only for iOS
+    }
   }
 
   ionViewDidLoad() {
@@ -84,27 +92,23 @@ export class LockScreenPage {
     })
   }
 
-  startTouchID() {
-    this.faio.show({
-      clientId: 'FingerPrintLockScreen',
-      clientSecret: 'lasd08aah@981',   //Only necessary for Android
-      disableBackup:true,              //Only for Android(optional)
-      localizedFallbackTitle: 'Insira o Pin',      //Only for iOS
-      localizedReason: 'Autentique-se' //Only for iOS
-    })
-    .then((result: any) => {
-      // If the TouchID is correct
-      this.storage.get('password_encrypt').then(pwd => {
-        let stored_pincode = String(pwd)
-        console.log("Stored password: " + stored_pincode)
-  
-        // Go to home page
-        this.navCtrl.setRoot(HomePage, {
-            pincode: stored_pincode
+  async showTouchID() {
+    try {
+      await this.platform.ready();
+      const available = await this.faio.isAvailable();
+      console.log(available);
+      if (available === "OK") {
+        this.faio.show(this.faioOptions).then(res =>{
+          this.navCtrl.setRoot(HomePage, {
+            pincode: this.storage.get('password_encrypt')
           });
-        }
-      )
-    })
+        })
+        
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    
   }
 
   presentAlert(title: string, message: string, register: boolean) {

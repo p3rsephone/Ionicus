@@ -58,10 +58,12 @@
   "cordova-plugin-fingerprint-aio": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-fingerprint-aio"
+      "id": "cordova-plugin-fingerprint-aio@^1.3.4"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "FACEID_USAGE_DESCRIPTION": "Desbloqueie a aplicação...."
+    }
   },
   "cordova-plugin-add-swift-support": {
     "source": {

@@ -111,6 +111,7 @@ export class LockScreenPage {
     
   }
 
+  
   presentAlert(title: string, message: string, register: boolean) {
     var botoes;
     if (register) {

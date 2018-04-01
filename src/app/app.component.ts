@@ -1,11 +1,13 @@
 import { LockScreenPage } from './../pages/lock-screen/lock-screen';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
+import { HomeService } from './services/home.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [HomeService]
 })
 export class MyApp {
   rootPage:any= LockScreenPage;

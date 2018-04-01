@@ -7,12 +7,57 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Cartão Cidadão</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
- {{pincode}}
+  <ion-list>
+      <ion-item *ngFor="let item of items">
+          <ion-thumbnail *ngIf="item[0]" item-left>
+              <img src="data:image/jpg;base64,{{item[0]}}">
+          </ion-thumbnail>
+          <p>
+            <b>1.</b> {{item[1]}}
+          </p>
+          <p>
+            <b>2.</b> {{item[2]}}
+          </p>
+          <p>
+            <b>3.</b> {{item[3]}}
+          </p>
+          <p>
+            <b>4a.</b> {{item['4a']}} <b>4b.</b> {{item['4b']}}
+          </p>
+          <p>
+            <b>4c.</b> {{item['4c']}} <b>4d.</b> {{item['4d']}}
+          </p>
+          <p>
+            <b>5.</b> {{item[5]}}
+          </p>
+          <p>
+            <b>7.</b> 
+            <ion-thumbnail *ngIf="item[7]" item-left>
+                <img src="data:image/jpg;base64,{{item[7]}}">
+            </ion-thumbnail>
+          </p>
+          <p>
+            <b>8.</b> {{item[8]}}
+          </p>
+          <p>
+              <b>9.</b>
+          </p>
+          <p>
+            <b>classe:</b>  {{item[9][0]['classe']}}  
+            <b>s:</b> {{item[9][0]['s']}} 
+            <b>f:</b> {{item[9][0]['f']}} 
+          </p>
+          <p>
+            <b>classe:</b>  {{item[9][1]['classe']}}  
+            <b>s:</b> {{item[9][1]['s']}} 
+            <b>f:</b> {{item[9][1]['f']}} 
+          </p>   
+      </ion-item>
+  </ion-list>
 </ion-content>
+

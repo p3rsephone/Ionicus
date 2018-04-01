@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { HomeService } from '../../app/services/home.service';
 
 /**
  * Generated class for the HomePage page.
@@ -8,21 +9,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
 export class HomePage {
 
-  public pincode: string
+  public pincode: string;
+  items:any;
+  category: any;
+  limit:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private homeService: HomeService) {
     this.pincode = navParams.get('pincode');
+    this.getDefaults();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+  ngOnInit() {
+      this.getPosts(this.category,this.limit);
+  }
+
+  getPosts(category, limit){
+      this.homeService.getPosts(category, limit).subscribe(response => {
+          this.items =response.data;
+      });
+      console.log(this.items);
+  }
+
+  getDefaults(){
+      this.category = 'sports';
+      this.limit = 10;
   }
 
 }

@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage'
+import { Http, HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { LockScreenPage } from '../pages/lock-screen/lock-screen';
@@ -22,6 +24,8 @@ import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
     BrowserAnimationsModule,
     BrowserModule,
     PincodeInputModule,
+    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

@@ -6,17 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Cartão Cidadão</ion-title>
+  <ion-navbar color="favorite">
+    <ion-title>Carta de Condução</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-      <ion-item *ngFor="let item of items">
-          <ion-thumbnail *ngIf="item[0]" item-left>
+  <ion-list *ngFor="let item of items">
+      <div class="card">
+          <ion-thumbnail *ngIf="item[0]">
               <img src="data:image/jpg;base64,{{item[0]}}">
           </ion-thumbnail>
+          <div class="container">
           <p>
             <b>1.</b> {{item[1]}}
           </p>
@@ -37,7 +38,7 @@
           </p>
           <p>
             <b>7.</b> 
-            <ion-thumbnail *ngIf="item[7]" item-left>
+            <ion-thumbnail *ngIf="item[7]">
                 <img src="data:image/jpg;base64,{{item[7]}}">
             </ion-thumbnail>
           </p>
@@ -47,17 +48,16 @@
           <p>
               <b>9.</b>
           </p>
-          <p>
-            <b>classe:</b>  {{item[9][0]['classe']}}  
-            <b>s:</b> {{item[9][0]['s']}} 
-            <b>f:</b> {{item[9][0]['f']}} 
-          </p>
-          <p>
-            <b>classe:</b>  {{item[9][1]['classe']}}  
-            <b>s:</b> {{item[9][1]['s']}} 
-            <b>f:</b> {{item[9][1]['f']}} 
-          </p>   
-      </ion-item>
+          <ion-list *ngFor="let car of item[9]; let in = index">
+            <p>
+              <ion-icon name="car"></ion-icon>
+              <b>classe:</b>  {{item[9][in]['classe']}}  
+              <b>s:</b> {{item[9][in]['s']}} 
+              <b>f:</b> {{item[9][in]['f']}} 
+            </p>
+          </ion-list>
+        </div>
+        </div>
   </ion-list>
 </ion-content>
 

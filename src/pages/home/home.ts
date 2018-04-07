@@ -17,28 +17,19 @@ export class HomePage {
 
   public pincode: string;
   items:any;
-  category: any;
-  limit:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private homeService: HomeService) {
     this.pincode = navParams.get('pincode');
-    this.getDefaults();
   }
 
   ngOnInit() {
-      this.getPosts(this.category,this.limit);
+      this.getPosts();
   }
 
-  getPosts(category, limit){
-      this.homeService.getPosts(category, limit).subscribe(response => {
+  getPosts(){
+      this.homeService.getPosts().subscribe(response => {
           this.items =response.data;
       });
-      console.log(this.items);
-  }
-
-  getDefaults(){
-      this.category = 'sports';
-      this.limit = 10;
   }
 
 }

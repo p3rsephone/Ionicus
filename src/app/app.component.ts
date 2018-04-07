@@ -4,6 +4,7 @@ import { Platform } from 'ionic-angular';
 import { HomeService } from './services/home.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
   templateUrl: 'app.html',

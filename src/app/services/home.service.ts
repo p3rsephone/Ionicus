@@ -13,8 +13,12 @@ export class HomeService{
         this.baseUrl = 'https://ionicus.herokuapp.com/user/1';
     }
 
-    getPosts(category, limit){
+    getPosts(){
         return this.http.get(this.baseUrl)
             .map(res => res.json());
+    }
+
+    getURL(){
+        return this.baseUrl;
     }
 }

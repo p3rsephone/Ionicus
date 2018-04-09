@@ -1,4 +1,5 @@
 import { HomePage } from './../home/home';
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { PincodeController } from "ionic2-pincode-input/dist";
@@ -98,8 +99,8 @@ export class LockScreenPage {
         let stored_pincode = String(pwd)
         console.log("Stored password: " + stored_pincode)
   
-        // Go to home page
-        this.navCtrl.setRoot(HomePage, {
+        // Go to tabs page
+        this.navCtrl.setRoot(TabsPage, {
             pincode: stored_pincode
           });
         }
@@ -135,7 +136,7 @@ export class LockScreenPage {
     let hash = String(CryptoJS.SHA256(pincode))
     this.storage.set('password_encrypt', hash);
     this.storage.set('settings',"");
-    this.navCtrl.setRoot(HomePage, {
+    this.navCtrl.setRoot(TabsPage, {
       pincode: hash
     });
   }
@@ -148,9 +149,9 @@ export class LockScreenPage {
       let stored_pincode = String(pwd)
       console.log("Stored password: " + stored_pincode)
 
-      // if match go to home page
+      // if match go to tabs page
       if (entered_pincode == stored_pincode) {
-        this.navCtrl.setRoot(HomePage, {
+        this.navCtrl.setRoot(TabsPage, {
           pincode: entered_pincode
         });
       }

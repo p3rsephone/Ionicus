@@ -1,2 +1,2 @@
 # Ionicus
-Ionicus is great
+Ionicus is great!

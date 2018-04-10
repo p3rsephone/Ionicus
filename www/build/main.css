@@ -33536,9 +33536,16 @@ qrcode ion-content {
   background: #ffffff;
 }
 
+qrcode button {
+  background-color: favorite;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 qrcode .card {
   width: 100%;
   margin: auto;
+  padding: 10px;
   text-align: center;
 }
 

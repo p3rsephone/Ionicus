@@ -8,9 +8,21 @@
   
   <ion-content padding>
     <div class="card">
-      <h3>Aqui está o seu qrcode:</h3>
-      <div>
+      <button (click)="toggleAllInfo()">{{showAll ? "Hide AllInfo QrCode" : "Show AllInfo Qrcode"}}</button>
+      <div *ngIf="showAll">
         <ngx-qrcode [qrc-value]="items"></ngx-qrcode>
+      </div>
+    </div>
+    <div class="card">
+      <button (click)="toggle18()">{{show18 ? "Hide 18 QrCode" : "Show 18 Qrcode"}}</button>
+      <div *ngIf="show18">
+        <ngx-qrcode [qrc-value]="output18"></ngx-qrcode>
+      </div>
+    </div>
+    <div class="card">
+      <button (click)="toggle21()">{{show21 ? "Hide 21 QrCode" : "Show 21 Qrcode"}}</button>
+      <div *ngIf="show21">
+        <ngx-qrcode [qrc-value]="output21"></ngx-qrcode>
       </div>
     </div>
   </ion-content>

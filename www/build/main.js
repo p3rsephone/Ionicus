@@ -192,7 +192,83 @@ var QrCodePage = /** @class */ (function () {
     function QrCodePage(navCtrl, homeService) {
         this.navCtrl = navCtrl;
         this.homeService = homeService;
+        this.showAll = false;
+        this.show18 = false;
+        this.show21 = false;
     }
+    QrCodePage.prototype.createJSON18 = function () {
+        if (this.items != undefined) {
+            var data = this.items[0][3].split(" ", 3);
+            var d = new Date(Date.parse(data[1] + "/" + data[0] + "/" + data[2]));
+            var time = (new Date().getTime()) - d.getTime();
+            var ageDate = new Date(time);
+            var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
+            //console.log(anos>18 ? true: false);
+            if (anos > 18) {
+                var obj = [{
+                        maior18: true
+                    }];
+                this.output18 = obj;
+            }
+            else {
+                var obj = [{
+                        maior18: false
+                    }];
+                this.output18 = obj;
+            }
+        }
+    };
+    QrCodePage.prototype.createJSON21 = function () {
+        if (this.items != undefined) {
+            var data = this.items[0][3].split(" ", 3);
+            var d = new Date(Date.parse(data[1] + "/" + data[0] + "/" + data[2]));
+            var time = (new Date().getTime()) - d.getTime();
+            var ageDate = new Date(time);
+            var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
+            console.log(anos > 21 ? true : false);
+            if (anos > 21) {
+                var obj = [{
+                        maior21: true
+                    }];
+                this.output21 = obj;
+            }
+            else {
+                var obj = [
+                    {
+                        maior21: false
+                    }
+                ];
+                this.output21 = obj;
+            }
+        }
+    };
+    QrCodePage.prototype.toggleAllInfo = function () {
+        console.log(this.items);
+        if (this.showAll) {
+            this.showAll = false;
+        }
+        else {
+            this.showAll = true;
+        }
+    };
+    QrCodePage.prototype.toggle18 = function () {
+        this.createJSON18();
+        if (this.show18) {
+            this.show18 = false;
+        }
+        else {
+            this.show18 = true;
+        }
+    };
+    QrCodePage.prototype.toggle21 = function () {
+        this.createJSON21();
+        if (this.show21) {
+            this.show21 = false;
+        }
+        else {
+            this.show21 = true;
+        }
+    };
     QrCodePage.prototype.ngOnInit = function () {
         this.getPosts();
     };
@@ -204,7 +280,7 @@ var QrCodePage = /** @class */ (function () {
     };
     QrCodePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'qrcode',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title>\n          QrCode\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <div class="card">\n      <h3>Aqui está o seu qrcode:</h3>\n      <div>\n        <ngx-qrcode [qrc-value]="items"></ngx-qrcode>\n      </div>\n    </div>\n  </ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/
+            selector: 'qrcode',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title>\n          QrCode\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <div class="card">\n      <button (click)="toggleAllInfo()">{{showAll ? "Hide AllInfo QrCode" : "Show AllInfo Qrcode"}}</button>\n      <div *ngIf="showAll">\n        <ngx-qrcode [qrc-value]="items"></ngx-qrcode>\n      </div>\n    </div>\n    <div class="card">\n      <button (click)="toggle18()">{{show18 ? "Hide 18 QrCode" : "Show 18 Qrcode"}}</button>\n      <div *ngIf="show18">\n        <ngx-qrcode [qrc-value]="output18"></ngx-qrcode>\n      </div>\n    </div>\n    <div class="card">\n      <button (click)="toggle21()">{{show21 ? "Hide 21 QrCode" : "Show 21 Qrcode"}}</button>\n      <div *ngIf="show21">\n        <ngx-qrcode [qrc-value]="output21"></ngx-qrcode>\n      </div>\n    </div>\n  </ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_services_home_service__["a" /* HomeService */]])
     ], QrCodePage);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'settings',
@@ -7,8 +7,12 @@ import { NavController } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navParams: NavParams, public navCtrl: NavController) {
 
+  }
+
+  toggleReset(){
+    this.navParams.get('storage').set('key',null);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomeService } from '../../app/services/home.service';
 
@@ -16,20 +17,50 @@ import { HomeService } from '../../app/services/home.service';
 export class HomePage {
 
   public pincode: string;
-  items:any;
+  item: any;
+  key: any;
+  show1: boolean;
+  show2: boolean;
+  tfront: boolean;
+  tback: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private homeService: HomeService) {
-    this.pincode = navParams.get('pincode');
+  constructor(public plt: Platform, public navCtrl: NavController, public navParams: NavParams, private homeService: HomeService) {
+    this.show1=true;
+    this.show2=false;
+    this.tfront=true;
+    this.tback=false;
   }
 
   ngOnInit() {
-      this.getPosts();
-  }
-
-  getPosts(){
-      this.homeService.getPosts().subscribe(response => {
-          this.items =response.data;
+      this.navParams.get('storage').get('key').then((val) => {
+        this.key= val;
+        this.getPosts();
       });
   }
 
+  getPosts(){
+      this.homeService.getPosts(this.key).subscribe(response => {
+          this.item =response;
+      });
+  }
+
+  toggleB1(){
+    this.show1=true;
+    this.show2=false;
+  }
+
+  toggleB2(){
+    this.show1=false;
+    this.show2=true;
+  }
+
+  toggleTB(){
+    this.tfront=false;
+    this.tback=true;
+  }
+
+  toggleTF(){
+    this.tback=false;
+    this.tfront=true;
+  }
 }

@@ -33503,17 +33503,73 @@ page-home .container {
   -webkit-box-shadow: 4px 7px 39px 14px rgba(0, 0, 0, 0.42);
   box-shadow: 4px 7px 39px 14px rgba(0, 0, 0, 0.42);
   background-color: #F2F2F2;
-  width: 100%;
   margin: auto;
   text-align: center;
 }
 
-page-home img {
+page-home .imagem {
   max-width: 350px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+page-home .imagem2 {
+  max-width: 350px;
+  display: block;
+  width: 50%;
+}
+
+page-home .imagem3 {
+  max-width: 350px;
+  width: 90%;
+}
+
+page-home .row {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  margin: 20px;
+  border-radius: 15px;
+  background-color: thistle;
+}
+
+page-home .row2 {
+  border-radius: 15px;
+  background-color: thistle;
+}
+
+page-home .column {
+  font-size: 80%;
+  float: left;
+  width: 50%;
+}
+
+page-home .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+page-home .back {
+  margin: auto;
+  padding: 10px;
+}
+
+page-home table, page-home th, page-home td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: auto;
+  padding: 5px;
+}
+
+key ion-content {
+  background: #ffffff;
+}
+
+key ion-textarea {
+  border: #000000;
 }
 
 ion-content {
@@ -33536,9 +33592,15 @@ qrcode ion-content {
   background: #ffffff;
 }
 
+qrcode button {
+  padding: 10px;
+  border-radius: 8px;
+}
+
 qrcode .card {
   width: 100%;
   margin: auto;
+  padding: 10px;
   text-align: center;
 }
 

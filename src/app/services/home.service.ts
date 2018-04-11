@@ -10,11 +10,11 @@ export class HomeService{
 
     constructor(http:Http){
         this.http = http;
-        this.baseUrl = 'https://ionicus.herokuapp.com/user/1';
+        this.baseUrl = 'http://ionicos-dev.herokuapp.com/user/';
     }
 
-    getPosts(){
-        return this.http.get(this.baseUrl)
+    getPosts(key){
+        return this.http.get(this.baseUrl+key)
             .map(res => res.json());
     }
 

@@ -12,10 +12,11 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngFor="let item of items">
-      <div class="card">
+    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Show Modern Card</button>
+    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Show Traditional Card</button>
+    <div class="card" *ngIf="show1 && item">
           <ion-thumbnail *ngIf="item[0]">
-              <img src="data:image/jpg;base64,{{item[0]}}">
+              <img class="imagem" src="data:image/jpg;base64,{{item[0]}}">
           </ion-thumbnail>
           <div class="container">
           <p>
@@ -39,13 +40,13 @@
           <p>
             <b>7.</b> 
             <ion-thumbnail *ngIf="item[7]">
-                <img src="data:image/jpg;base64,{{item[7]}}">
+                <img class="imagem" src="data:image/jpg;base64,{{item[7]}}">
             </ion-thumbnail>
           </p>
           <p>
             <b>8.</b> {{item[8]}}
           </p>
-          <p>
+          <p>item
               <b>9.</b>
           </p>
           <ion-list *ngFor="let car of item[9]; let in = index">
@@ -57,7 +58,60 @@
             </p>
           </ion-list>
         </div>
+      </div>
+      <div (click)="toggleTB()" class="row" *ngIf="show2 && item && tfront">
+        <div class="column">
+          <ion-thumbnail *ngIf="item[0]">
+              <img class="imagem3" src="data:image/jpg;base64,{{item[0]}}">
+          </ion-thumbnail>
         </div>
-  </ion-list>
+        <div class="column">
+          <p>
+            <b>1.</b> {{item[1]}}
+          </p>
+          <p>
+            <b>2.</b> {{item[2]}}
+          </p>
+          <p>
+            <b>3.</b> {{item[3]}}
+          </p>
+          <p>
+            <b>4a.</b> {{item['4a']}} <b>4b.</b> {{item['4b']}}
+          </p>
+          <p>
+            <b>4c.</b> {{item['4c']}} <b>4d.</b> {{item['4d']}}
+          </p>
+          <p>
+            <b>5.</b> {{item[5]}}
+          </p>
+          <p>
+            <b>7.</b> 
+            <ion-thumbnail *ngIf="item[7]">
+                <img class="imagem2" src="data:image/jpg;base64,{{item[7]}}">
+            </ion-thumbnail>
+          </p>
+          <p>
+            <b>8.</b> {{item[8]}}
+          </p>
+        </div>
+      </div>
+      <div (click)="toggleTF()" class="row2" *ngIf="show2 && item && tback">
+        <div class="back">
+          <table>
+              <tr>
+                <th>9.</th>
+                <th>10.</th>
+                <th>11.</th>
+                <th>12.</th>
+              </tr>
+              <tr *ngFor="let car of item[9]; let in = index">
+                <td>{{item[9][in]['classe']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item[9][in]['s']}} </td>
+                <td>{{item[9][in]['f']}} </td>
+              </tr> 
+          </table>
+        </div>
+      </div>        
 </ion-content>
 

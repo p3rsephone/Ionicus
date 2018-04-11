@@ -8,19 +8,19 @@
   
   <ion-content padding>
     <div class="card">
-      <button (click)="toggleAllInfo()">{{showAll ? "Hide AllInfo QrCode" : "Show AllInfo Qrcode"}}</button>
+      <button (click)="toggleAllInfo()" ion-button block style="background-color: #ffffff; color: #000000">{{showAll ? "Hide AllInfo QrCode" : "Show AllInfo Qrcode"}}</button>
       <div *ngIf="showAll">
-        <ngx-qrcode [qrc-value]="items"></ngx-qrcode>
+        <ngx-qrcode [qrc-value]="allinfo" [qrc-version]=5 qrc-errorCorrectionLevel = "L"></ngx-qrcode>
       </div>
     </div>
     <div class="card">
-      <button (click)="toggle18()">{{show18 ? "Hide 18 QrCode" : "Show 18 Qrcode"}}</button>
+      <button (click)="toggle18()" ion-button block style="background-color: #ffffff; color: #000000">{{show18 ? "Hide 18 QrCode" : "Show 18 Qrcode"}}</button>
       <div *ngIf="show18">
         <ngx-qrcode [qrc-value]="output18"></ngx-qrcode>
       </div>
     </div>
     <div class="card">
-      <button (click)="toggle21()">{{show21 ? "Hide 21 QrCode" : "Show 21 Qrcode"}}</button>
+      <button (click)="toggle21()" ion-button block style="background-color: #ffffff; color: #000000">{{show21 ? "Hide 21 QrCode" : "Show 21 Qrcode"}}</button>
       <div *ngIf="show21">
         <ngx-qrcode [qrc-value]="output21"></ngx-qrcode>
       </div>

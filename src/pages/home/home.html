@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar color="favorite">
-    <ion-title>Carta de Condução</ion-title>
+    <ion-title text-center>Carta de Condução</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Show Modern Card</button>
-    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Show Traditional Card</button>
+    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Vista Moderna</button>
+    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Carta Tradicional</button>
     <div class="card" *ngIf="show1 && item">
           <ion-thumbnail *ngIf="item[0]">
               <img class="imagem" src="data:image/jpg;base64,{{item[0]}}">

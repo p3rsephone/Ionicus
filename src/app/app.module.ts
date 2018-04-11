@@ -2,6 +2,7 @@ import { HomePage } from './../pages/home/home';
 import { SettingsPage } from './../pages/settings/settings';
 import { QrCodePage } from './../pages/qrcode/qrcode';
 import { TabsPage } from './../pages/tabs/tabs';
+import { KeyPage } from './../pages/key/key';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -25,6 +26,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     MyApp,
     LockScreenPage,
     HomePage,
+    KeyPage,
     SettingsPage,
     QrCodePage,
     TabsPage
@@ -44,6 +46,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     MyApp,
     LockScreenPage,
     HomePage,
+    KeyPage,
     SettingsPage,
     QrCodePage,
     TabsPage

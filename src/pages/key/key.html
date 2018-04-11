@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="favorite">
-      <ion-title>
-          Settings
+      <ion-title text-center>
+          Chave Móvel Digital
       </ion-title>
     </ion-navbar>
 </ion-header>
@@ -9,10 +9,10 @@
 <ion-content padding *ngIf="show">
   <form (ngSubmit)="toggleKey()">
       <ion-item>
-        <ion-label>Key:</ion-label>
+        <ion-label>Chave Móvel Digital:</ion-label>
         <ion-textarea [(ngModel)]="key" name="key"></ion-textarea>
       </ion-item>
-      <button ion-button type="submit" block style="background-color: #32db64;">Submit</button>
+      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>
   </form>
 </ion-content>
   

@@ -31,13 +31,14 @@ export class QrCodePage {
       var time = (new Date().getTime()) - d.getTime();
       var ageDate = new Date(time);
       var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
+      var obj;
       
       if(anos>18){
-        var obj: any = "[{maior18:true}]";
+        obj = "[{maior18:true}]";
         this.output18 = obj;
       }
       else{
-        var obj: any = "[{maior18:false}]";
+        obj  = "[{maior18:false}]";
         this.output18 = obj;
       }
     }
@@ -50,13 +51,14 @@ export class QrCodePage {
       var time = (new Date().getTime()) - d.getTime();
       var ageDate = new Date(time);
       var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
-      
+      var obj
+
       if(anos>21){
-        var obj: any = "[{maior21:true}]";
+        obj = "[{maior21:true}]";
         this.output21 = obj;
       }
       else{
-        var obj: any = "[{maior21:false}]";
+        obj = "[{maior21:false}]";
         this.output21 = obj;
       }
     }

@@ -15,83 +15,74 @@
     <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Vista Moderna</button>
     <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Carta Tradicional</button>
     <div class="card" *ngIf="show1 && item">
-          <ion-thumbnail *ngIf="item[0]">
-              <img class="imagem" src="data:image/jpg;base64,{{item[0]}}">
+          <ion-thumbnail *ngIf="item.ass">
+              <img class="imagem" [src]="photo">
           </ion-thumbnail>
           <div class="container">
           <p>
-            <b>1.</b> {{item[1]}}
+            <b>1.</b> {{item.surname}}
           </p>
           <p>
-            <b>2.</b> {{item[2]}}
+            <b>2.</b> {{item.name}}
           </p>
           <p>
-            <b>3.</b> {{item[3]}}
+            <b>3.</b> {{item.birthday}} {{item.birthSite}}
           </p>
           <p>
-            <b>4a.</b> {{item['4a']}} <b>4b.</b> {{item['4b']}}
+            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}
           </p>
           <p>
-            <b>4c.</b> {{item['4c']}} <b>4d.</b> {{item['4d']}}
+            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}
           </p>
           <p>
-            <b>5.</b> {{item[5]}}
+            <b>5.</b> {{item.licenseNumber}}
           </p>
           <p>
             <b>7.</b> 
-            <ion-thumbnail *ngIf="item[7]">
-                <img class="imagem" src="data:image/jpg;base64,{{item[7]}}">
+            <ion-thumbnail *ngIf="item.ass">
+                <img class="imagem" [src]="ass">
             </ion-thumbnail>
           </p>
-          <p>
-            <b>8.</b> {{item[8]}}
-          </p>
-          <p>item
-              <b>9.</b>
-          </p>
-          <ion-list *ngFor="let car of item[9]; let in = index">
+          <ion-list *ngFor="let car of item.types; let in = index">
             <p>
               <ion-icon name="car"></ion-icon>
-              <b>classe:</b>  {{item[9][in]['classe']}}  
-              <b>s:</b> {{item[9][in]['s']}} 
-              <b>f:</b> {{item[9][in]['f']}} 
+              <b>classe:</b>  {{item.types[in]['name']}}  
+              <b>s:</b> {{item.types[in]['firstDate']}} 
+              <b>f:</b> {{item.types[in]['validUntil']}} 
             </p>
           </ion-list>
         </div>
       </div>
       <div (click)="toggleTB()" class="row" *ngIf="show2 && item && tfront">
         <div class="column">
-          <ion-thumbnail *ngIf="item[0]">
-              <img class="imagem3" src="data:image/jpg;base64,{{item[0]}}">
+          <ion-thumbnail *ngIf="item.photo">
+            <img class="imagem3" [src]="photo">
           </ion-thumbnail>
         </div>
         <div class="column">
           <p>
-            <b>1.</b> {{item[1]}}
+            <b>1.</b> {{item.surname}}
           </p>
           <p>
-            <b>2.</b> {{item[2]}}
+            <b>2.</b> {{item.name}}
           </p>
           <p>
-            <b>3.</b> {{item[3]}}
+            <b>3.</b> {{item.birthday}} {{birthSite}}
           </p>
           <p>
-            <b>4a.</b> {{item['4a']}} <b>4b.</b> {{item['4b']}}
+            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}
           </p>
           <p>
-            <b>4c.</b> {{item['4c']}} <b>4d.</b> {{item['4d']}}
+            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}
           </p>
           <p>
-            <b>5.</b> {{item[5]}}
+            <b>5.</b> {{item.licenseNumber}}
           </p>
           <p>
             <b>7.</b> 
-            <ion-thumbnail *ngIf="item[7]">
-                <img class="imagem2" src="data:image/jpg;base64,{{item[7]}}">
+            <ion-thumbnail *ngIf="item.ass">
+              <img class="imagem2" [src]="ass">
             </ion-thumbnail>
-          </p>
-          <p>
-            <b>8.</b> {{item[8]}}
           </p>
         </div>
       </div>
@@ -104,11 +95,11 @@
                 <th>11.</th>
                 <th>12.</th>
               </tr>
-              <tr *ngFor="let car of item[9]; let in = index">
-                <td>{{item[9][in]['classe']}} </td>
+              <tr *ngFor="let car of item.types; let in = index">
+                <td>{{item.types[in]['name']}} </td>
                 <td><ion-icon name="car"></ion-icon></td>
-                <td>{{item[9][in]['s']}} </td>
-                <td>{{item[9][in]['f']}} </td>
+                <td>{{item.types[in]['firstDate']}} </td>
+                <td>{{item.types[in]['validUntil']}} </td>
               </tr> 
           </table>
         </div>

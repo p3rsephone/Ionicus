@@ -1,13 +1,34 @@
 <ion-header>
-    <ion-navbar color="favorite">
-      <ion-title>
-          Settings
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-      DO YOU WANT TO RESET YOUR KEY ?
-      <button (click)="toggleReset()" ion-button block style="background-color: #ffffff; color: red">RESET</button>
-  </ion-content>
-  
+  <ion-navbar color="favorite">
+    <ion-title text-center>
+      Definições
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Segurança e Privacidade
+    </ion-list-header>
+    <button ion-item (click)="resetPassword()">
+      <ion-icon name="lock" item-start></ion-icon>
+      Alterar o PIN
+    </button>
+    <ion-item>
+        <ion-label>Touch ID</ion-label>
+        <ion-icon name="finger-print" item-start></ion-icon>
+        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>
+    </ion-item>
+    <ion-list-header>
+      Dados pessoais
+    </ion-list-header>
+    <button ion-item block outline color="danger" (click)="resetToken()">
+        Apagar chave única
+    </button>
+    <button ion-item block outline color="danger" (click)="resetAlert()">
+        Apagar todos os dados
+    </button>
+  </ion-list>
+</ion-content>

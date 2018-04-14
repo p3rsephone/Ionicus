@@ -16,24 +16,25 @@ export class QrCodePage {
   output21: any;
   allinfo: any;
   key: any;
+  token: any;
 
   constructor(public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams) {
     this.showAll=false;
     this.show18=false;
     this.show21=false;
-    this.key=this.navParams.get('storage').get('key');
   }
 
   createJSON18(){
     if(this.items!=undefined){
-      var data = this.items[3].split(" ", 3);
-      var d = new Date(Date.parse(data[1]+"/"+data[0]+"/"+data[2]));
+      var data = this.items.birthday.split("-", 3);
+      var d = new Date(Date.parse(data[1]+"/"+data[2]+"/"+data[0]));
       var time = (new Date().getTime()) - d.getTime();
       var ageDate = new Date(time);
       var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
+      console.log(anos);
       var obj;
       
-      if(anos>18){
+      if(anos>=18){
         obj = "[{maior18:true}]";
         this.output18 = obj;
       }
@@ -46,14 +47,14 @@ export class QrCodePage {
 
   createJSON21(){
     if(this.items!=undefined){
-      var data = this.items[3].split(" ", 3);
-      var d = new Date(Date.parse(data[1]+"/"+data[0]+"/"+data[2]));
+      var data = this.items.birthday.split("-", 3);
+      var d = new Date(Date.parse(data[1]+"/"+data[2]+"/"+data[0]));
       var time = (new Date().getTime()) - d.getTime();
       var ageDate = new Date(time);
       var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
       var obj
 
-      if(anos>21){
+      if(anos>=21){
         obj = "[{maior21:true}]";
         this.output21 = obj;
       }
@@ -66,7 +67,7 @@ export class QrCodePage {
 
   infoArray(){
     if(this.items!=undefined){
-      var jstr = '[{site:"http://ionicos-dev.herokuapp.com/user/'+ this.key +'"}]';
+      var jstr = '[{site:"http://dev-ionicus.herokuapp.com/users/'+ this.key +'"}]';
       this.allinfo = jstr;
     }
   }
@@ -78,6 +79,23 @@ export class QrCodePage {
     }
     else{
       this.showAll=true;
+      this.navParams.get('storage').get('history').then((val) => {
+        var array = val;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var dds, mms, todays;
+        if(dd<10) {
+            dds = '0'+dd
+        } 
+        if(mm<10) {
+            mms = '0'+mm
+        } 
+        todays = mm + '/' + dd + '/' + yyyy;
+        val.unshift("Mostrei a minha informação toda no dia " + todays);
+        this.navParams.get('storage').set('history', val);
+      });
     }
   }
 
@@ -88,6 +106,23 @@ export class QrCodePage {
     }
     else{
       this.show18=true;
+      this.navParams.get('storage').get('history').then((val) => {
+        var array = val;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var dds, mms, todays;
+        if(dd<10) {
+            dds = '0'+dd
+        } 
+        if(mm<10) {
+            mms = '0'+mm
+        } 
+        todays = mm + '/' + dd + '/' + yyyy;
+        val.unshift("Mostrei que tinha mais de 18 anos no dia " + todays);
+        this.navParams.get('storage').set('history', val);
+      });
     }
   }
 
@@ -98,18 +133,38 @@ export class QrCodePage {
     }
     else{
       this.show21=true;
+      this.navParams.get('storage').get('history').then((val) => {
+        var array = val;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var dds, mms, todays;
+        if(dd<10) {
+            dds = '0'+dd
+        } 
+        if(mm<10) {
+            mms = '0'+mm
+        } 
+        todays = mm + '/' + dd + '/' + yyyy;
+        val.unshift("Mostrei que tinha mais de 21 anos no dia " + todays);
+        this.navParams.get('storage').set('history', val);
+      });
     }
   }
 
   ngOnInit() {
     this.navParams.get('storage').get('key').then((val) => {
       this.key= val;
-      this.getPosts();
+      this.navParams.get('storage').get('token').then((val2) => {
+        this.token=val2;
+        this.getPosts();
+      });
     });
   }
 
   getPosts(){
-    this.homeService.getPosts(this.key).subscribe(response => {
+    this.homeService.getPosts(this.key, this.token).subscribe(response => {
         this.items =response;
     });
   }

@@ -146,7 +146,7 @@ export class LockScreenPage {
   register(pincode) {
     let hash = String(CryptoJS.SHA256(pincode))
     this.storage.set('password_encrypt', hash);
-    this.storage.set('settings',"");
+    this.storage.set('first',true);
     this.navCtrl.setRoot(KeyPage, {
       pincode: hash
     });

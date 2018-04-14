@@ -1,5 +1,6 @@
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomeService } from '../../app/services/home.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -26,9 +27,11 @@ export class HomePage {
   photo: any;
   ass: any;
   loading: any;
+  storage: any
 
   constructor(public loadingCtrl: LoadingController, public plt: Platform, public navCtrl: NavController, 
-    public sanitizer: DomSanitizer, public navParams: NavParams, private homeService: HomeService) {
+    public sanitizer: DomSanitizer, public navParams: NavParams, private homeService: HomeService, private alertCtrl: AlertController) {
+    this.storage = navParams.get('storage');
     this.show1=true;
     this.show2=false;
     this.tfront=true;
@@ -46,6 +49,43 @@ export class HomePage {
           this.getPosts();
         });
       });
+  }
+
+  ionViewDidLoad() {
+    this.storage.get('first').then(bool => {
+      if(bool) {
+        console.log("First time")
+        console.log(bool);
+        this.faio();
+      } else {
+        console.log("NOT First time")
+      }
+    })
+  }
+
+  faio() {
+    this.storage.set('first', false);
+    let alert = this.alertCtrl.create({
+      title: 'Touch ID',
+      message: 'Deseja ativar o Touch ID?',
+      buttons:[
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Não clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log('Sim clicked');
+            this.storage.set('faio', true);
+          }
+        }
+      ]
+    })
+    alert.present()
   }
 
   getPosts(){

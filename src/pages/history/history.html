@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-navbar color="favorite">
+      <ion-title>
+          Histórico
+      </ion-title>
+    </ion-navbar>
+</ion-header>
+  
+<ion-content padding>
+    <div *ngIf="history != undefined">
+        <p class="item" *ngFor="let item of history">
+            {{item}}
+        </p>
+    </div>
+</ion-content>
+  

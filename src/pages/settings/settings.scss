@@ -3,29 +3,4 @@ settings {
     ion-content {
         background: #ffffff;
     }
-
-    .card {
-        width: 100%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .container {
-        border-radius: 15px;
-        -webkit-box-shadow: 4px 7px 39px 14px rgba(0,0,0,0.42);
-        -moz-box-shadow: 4px 7px 39px 14px rgba(0,0,0,0.42);
-        box-shadow: 4px 7px 39px 14px rgba(0,0,0,0.42);
-        background-color: #F2F2F2;
-        width: 100%;
-        margin: auto;
-        text-align: center;
-    }
-
-    img {
-        max-width: 350px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
 }

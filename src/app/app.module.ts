@@ -3,6 +3,8 @@ import { SettingsPage } from './../pages/settings/settings';
 import { QrCodePage } from './../pages/qrcode/qrcode';
 import { TabsPage } from './../pages/tabs/tabs';
 import { KeyPage } from './../pages/key/key';
+import { HistoryPage } from './../pages/history/history';
+import { Splash } from './../pages/splash/splash';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -12,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage'
 import { Http, HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { LockScreenPage } from '../pages/lock-screen/lock-screen';
@@ -27,7 +30,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     LockScreenPage,
     HomePage,
     KeyPage,
+    Splash,
     SettingsPage,
+    HistoryPage,
     QrCodePage,
     TabsPage
   ],
@@ -35,6 +40,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     BrowserAnimationsModule,
     BrowserModule,
     PincodeInputModule,
+    HttpClientModule,
     HttpModule,
     NgxQRCodeModule,
     HttpClientModule,
@@ -47,7 +53,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     LockScreenPage,
     HomePage,
     KeyPage,
+    Splash,
     SettingsPage,
+    HistoryPage,
     QrCodePage,
     TabsPage
   ],

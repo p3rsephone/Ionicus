@@ -14,10 +14,22 @@ import { Storage } from '@ionic/storage';
 export class LockScreenPage {
 
   code: string;
+  id: string;
   //Fazer tentativas depois
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public pincodeCtrl: PincodeController,
   private storage: Storage, private alertCtrl: AlertController, private faio: FingerprintAIO) {
+    this.storage.get('faio').then(fid => {
+      if (fid !== undefined) {
+        console.log("FAIO IS SET")
+        console.log(fid)
+        this.id = fid;
+      } else {
+        console.log("SET FAIO FALSE")
+        this.storage.set('faio', false);
+      }
+    })
+    .catch((error: any) => console.log(error))
   }
 
   ionViewDidLoad() {

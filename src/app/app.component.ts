@@ -1,6 +1,7 @@
 import { LockScreenPage } from './../pages/lock-screen/lock-screen';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, ModalController } from 'ionic-angular';
+import { Splash } from '../pages/splash/splash';
 import { HomeService } from './services/home.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any= LockScreenPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
     platform.ready().then(() => {
       /*
         if (PIN) {
@@ -26,7 +27,9 @@ export class MyApp {
         */
       //lockService.init();
       statusBar.styleDefault();
-      splashScreen.hide();
+      let splash = modalCtrl.create(Splash);
+      splash.present();
+      //splashScreen.hide();
     });
   }
 }

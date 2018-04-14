@@ -44,11 +44,13 @@ export class SettingsPage {
     this.storage.remove('password_encrypt');
     this.storage.set('faio', false);
     this.storage.remove('token');
+    this.storage.remove('key');
     this.presentAlert("Feito","Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
   }
 
   cleanToken(){
     this.storage.remove('token');
+    this.storage.remove('key');
     this.presentAlert("Feito","Chave única apagada. Reinicie a aplicação para terminar.");
   }
 

@@ -14,12 +14,17 @@
       </ion-item>
       <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>
   </form>
-  <form *ngIf="showT" (ngSubmit)="toggleToken()">
-      <ion-item>
-        <ion-label>Token:</ion-label>
-        <ion-textarea [(ngModel)]="token" name="token"></ion-textarea>
-      </ion-item>
-      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>
-  </form>
+  <div *ngIf="showT">
+    <form (ngSubmit)="toggleToken()">
+        <ion-item>
+          <ion-label>Token:</ion-label>
+          <ion-textarea [(ngModel)]="token" name="token"></ion-textarea>
+        </ion-item>
+        <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>
+    </form>
+    <form (ngSubmit)="toggleBC()">
+        <button ion-button type="submit" block style="background-color: #32db64;">Voltar Atrás</button>
+    </form>
+    </div>
 </ion-content>
   

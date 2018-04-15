@@ -17,6 +17,7 @@ export class QrCodePage {
   allinfo: any;
   key: any;
   token: any;
+  decision: boolean;
 
   constructor(public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams) {
     this.showAll=false;
@@ -35,10 +36,12 @@ export class QrCodePage {
       var obj;
       
       if(anos>=18){
+        this.decision = true;
         obj = "[{maior18:true}]";
         this.output18 = obj;
       }
       else{
+        this.decision = false;
         obj  = "[{maior18:false}]";
         this.output18 = obj;
       }
@@ -55,10 +58,12 @@ export class QrCodePage {
       var obj
 
       if(anos>=21){
+        this.decision = true;
         obj = "[{maior21:true}]";
         this.output21 = obj;
       }
       else{
+        this.decision = false
         obj = "[{maior21:false}]";
         this.output21 = obj;
       }
@@ -86,14 +91,8 @@ export class QrCodePage {
         var mm = today.getMonth()+1;
         var yyyy = today.getFullYear();
         var dds, mms, todays;
-        if(dd<10) {
-            dds = '0'+dd
-        } 
-        if(mm<10) {
-            mms = '0'+mm
-        } 
-        todays = mm + '/' + dd + '/' + yyyy;
-        val.unshift("Mostrei a minha informação toda no dia " + todays);
+        todays = dd + '/' + mm + '/' + yyyy;
+        val.unshift({hdr: "Toda a informação", cnt: "Mostrei toda a minha informação.", date: todays});
         this.navParams.get('storage').set('history', val);
       });
     }
@@ -112,15 +111,12 @@ export class QrCodePage {
         var dd = today.getDate();
         var mm = today.getMonth()+1;
         var yyyy = today.getFullYear();
-        var dds, mms, todays;
-        if(dd<10) {
-            dds = '0'+dd
-        } 
-        if(mm<10) {
-            mms = '0'+mm
-        } 
-        todays = mm + '/' + dd + '/' + yyyy;
-        val.unshift("Mostrei que tinha mais de 18 anos no dia " + todays);
+        var todays;
+        todays = dd + '/' + mm + '/' + yyyy;
+        var bool;
+        if (this.decision) bool = " não tinha "
+        else bool = " tinha "
+        val.unshift({hdr: "Maior do que 18 anos", cnt: "Mostrei que"+bool+"mais de 18 anos.", date:todays});
         this.navParams.get('storage').set('history', val);
       });
     }
@@ -139,15 +135,12 @@ export class QrCodePage {
         var dd = today.getDate();
         var mm = today.getMonth()+1;
         var yyyy = today.getFullYear();
-        var dds, mms, todays;
-        if(dd<10) {
-            dds = '0'+dd
-        } 
-        if(mm<10) {
-            mms = '0'+mm
-        } 
-        todays = mm + '/' + dd + '/' + yyyy;
-        val.unshift("Mostrei que tinha mais de 21 anos no dia " + todays);
+        var todays;
+        todays = dd + '/' + mm + '/' + yyyy;
+        var bool;
+        if (this.decision) bool = " não tinha "
+        else bool = " tinha "
+        val.unshift({hdr: "Maior do que 21 anos", cnt: "Mostrei que"+bool+"mais de 21 anos.", date:todays});
         this.navParams.get('storage').set('history', val);
       });
     }

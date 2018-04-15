@@ -728,7 +728,7 @@ var KeyPage = /** @class */ (function () {
             this.homeService.getToken(this.key).subscribe(function (response) {
                 _this.error = response;
                 if (_this.error.status == "error") {
-                    var alert = _this.alertCtrl.create({
+                    var alert_1 = _this.alertCtrl.create({
                         title: "ERRO",
                         subTitle: "Chave única errada",
                         buttons: [
@@ -738,7 +738,7 @@ var KeyPage = /** @class */ (function () {
                             }
                         ]
                     });
-                    alert.present();
+                    alert_1.present();
                 }
                 else {
                     _this.show = false;
@@ -758,7 +758,7 @@ var KeyPage = /** @class */ (function () {
                 _this.item = response;
                 console.log(_this.item.status);
                 if (_this.item.status == "error") {
-                    var alert = _this.alertCtrl.create({
+                    var alert_2 = _this.alertCtrl.create({
                         title: "ERRO",
                         subTitle: "Token errado",
                         buttons: [
@@ -768,7 +768,7 @@ var KeyPage = /** @class */ (function () {
                             }
                         ]
                     });
-                    alert.present();
+                    alert_2.present();
                 }
                 else {
                     var array = [];
@@ -786,10 +786,9 @@ var KeyPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'key',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Chave Móvel Digital\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n  <form *ngIf="show" (ngSubmit)="toggleKey()">\n      <ion-item>\n        <ion-label>Chave Móvel Digital:</ion-label>\n        <ion-textarea [(ngModel)]="key" name="key"></ion-textarea>\n      </ion-item>\n      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n  </form>\n  <div *ngIf="showT">\n    <form (ngSubmit)="toggleToken()">\n        <ion-item>\n          <ion-label>Token:</ion-label>\n          <ion-textarea [(ngModel)]="token" name="token"></ion-textarea>\n        </ion-item>\n        <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n    </form>\n    <form (ngSubmit)="toggleBC()">\n        <button ion-button type="submit" block style="background-color: #32db64;">Voltar Atrás</button>\n    </form>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_services_home_service__["a" /* HomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_services_home_service__["a" /* HomeService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__app_services_home_service__["a" /* HomeService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], KeyPage);
     return KeyPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=key.js.map
@@ -1292,10 +1291,9 @@ var HomeService = /** @class */ (function () {
     };
     HomeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], HomeService);
     return HomeService;
-    var _a;
 }());
 
 //# sourceMappingURL=home.service.js.map

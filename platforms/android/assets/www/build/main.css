@@ -33505,6 +33505,23 @@ history .item {
   padding: 5px;
 }
 
+<<<<<<< HEAD
+=======
+ion-card {
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+}
+
+ion-card-content {
+  text-align: center;
+}
+
+ion-card-header {
+  text-align: center;
+}
+
+>>>>>>> develop
 page-home ion-content {
   background: #ffffff;
 }

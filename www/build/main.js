@@ -47,13 +47,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var HomePage = /** @class */ (function () {
-    function HomePage(loadingCtrl, plt, navCtrl, sanitizer, navParams, homeService) {
+    function HomePage(loadingCtrl, plt, navCtrl, sanitizer, navParams, homeService, alertCtrl) {
         this.loadingCtrl = loadingCtrl;
         this.plt = plt;
         this.navCtrl = navCtrl;
         this.sanitizer = sanitizer;
         this.navParams = navParams;
         this.homeService = homeService;
+        this.alertCtrl = alertCtrl;
+        this.storage = navParams.get('storage');
         this.show1 = true;
         this.show2 = false;
         this.tfront = true;
@@ -71,6 +73,44 @@ var HomePage = /** @class */ (function () {
                 _this.getPosts();
             });
         });
+    };
+    HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.storage.get('first').then(function (bool) {
+            if (bool) {
+                console.log("First time");
+                console.log(bool);
+                _this.faio();
+            }
+            else {
+                console.log("NOT First time");
+            }
+        });
+    };
+    HomePage.prototype.faio = function () {
+        var _this = this;
+        this.storage.set('first', false);
+        var alert = this.alertCtrl.create({
+            title: 'Touch ID',
+            message: 'Deseja ativar o Touch ID?',
+            buttons: [
+                {
+                    text: 'Não',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Não clicked');
+                    }
+                },
+                {
+                    text: 'Sim',
+                    handler: function () {
+                        console.log('Sim clicked');
+                        _this.storage.set('faio', true);
+                    }
+                }
+            ]
+        });
+        alert.present();
     };
     HomePage.prototype.getPosts = function () {
         var _this = this;
@@ -109,7 +149,11 @@ var HomePage = /** @class */ (function () {
             selector: 'page-home',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/'<!--\n  Generated template for the HomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="favorite">\n    <ion-title text-center>Carta de Condução</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Vista Moderna</button>\n    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Carta Tradicional</button>\n    <div class="card" *ngIf="show1 && item">\n          <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem" [src]="photo">\n          </ion-thumbnail>\n          <div class="container">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{item.birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n                <img class="imagem" [src]="ass">\n            </ion-thumbnail>\n          </p>\n          <ion-list *ngFor="let car of item.types; let in = index">\n            <p>\n              <ion-icon name="car"></ion-icon>\n              <b>classe:</b>  {{item.types[in][\'name\']}}  \n              <b>s:</b> {{item.types[in][\'firstDate\']}} \n              <b>f:</b> {{item.types[in][\'validUntil\']}} \n            </p>\n          </ion-list>\n        </div>\n      </div>\n      <div (click)="toggleTB()" class="row" *ngIf="show2 && item && tfront">\n        <div class="column">\n          <ion-thumbnail *ngIf="item.photo">\n            <img class="imagem3" [src]="photo">\n          </ion-thumbnail>\n        </div>\n        <div class="column">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem2" [src]="ass">\n            </ion-thumbnail>\n          </p>\n        </div>\n      </div>\n      <div (click)="toggleTF()" class="row2" *ngIf="show2 && item && tback">\n        <div class="back">\n          <table>\n              <tr>\n                <th>9.</th>\n                <th>10.</th>\n                <th>11.</th>\n                <th>12.</th>\n              </tr>\n              <tr *ngFor="let car of item.types; let in = index">\n                <td>{{item.types[in][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[in][\'firstDate\']}} </td>\n                <td>{{item.types[in][\'validUntil\']}} </td>\n              </tr> \n          </table>\n        </div>\n      </div>        \n</ion-content>\n\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */],
+<<<<<<< HEAD
             __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["c" /* DomSanitizer */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_services_home_service__["a" /* HomeService */]])
+=======
+            __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["c" /* DomSanitizer */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_services_home_service__["a" /* HomeService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+>>>>>>> develop
     ], HomePage);
     return HomePage;
 }());
@@ -193,6 +237,13 @@ var SettingsPage = /** @class */ (function () {
         this.storage.remove('token');
         this.storage.remove('key');
         this.presentAlert("Feito", "Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
+    };
+    SettingsPage.prototype.cleanHistory = function () {
+        var _this = this;
+        this.storage.remove('history').then(function (val) {
+            _this.storage.set('history', []);
+            _this.presentAlert("Feito", "O seu histórico foi removido.");
+        });
     };
     SettingsPage.prototype.cleanToken = function () {
         this.storage.remove('token');
@@ -324,7 +375,11 @@ var SettingsPage = /** @class */ (function () {
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'settings',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/,
+=======
+            selector: 'settings',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="cleanHistory()">\n      Apagar histórico\n  </button>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/,
+>>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic2_pincode_input__["PincodeController"], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]])
     ], SettingsPage);
@@ -375,10 +430,12 @@ var QrCodePage = /** @class */ (function () {
             console.log(anos);
             var obj;
             if (anos >= 18) {
+                this.decision = true;
                 obj = "[{maior18:true}]";
                 this.output18 = obj;
             }
             else {
+                this.decision = false;
                 obj = "[{maior18:false}]";
                 this.output18 = obj;
             }
@@ -393,10 +450,12 @@ var QrCodePage = /** @class */ (function () {
             var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
             var obj;
             if (anos >= 21) {
+                this.decision = true;
                 obj = "[{maior21:true}]";
                 this.output21 = obj;
             }
             else {
+                this.decision = false;
                 obj = "[{maior21:false}]";
                 this.output21 = obj;
             }
@@ -430,7 +489,7 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei a minha informação toda no dia " + todays);
+                val.unshift({ hdr: "Toda a informação", cnt: "Mostrei toda a minha informação", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -457,7 +516,12 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei que tinha mais de 18 anos no dia " + todays);
+                var bool;
+                if (_this.decision)
+                    bool = " não tinha ";
+                else
+                    bool = " tinha ";
+                val.unshift({ hdr: "Maior do que 18 anos", cnt: "Mostrei que" + bool + "mais de 18 anos.", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -484,7 +548,12 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei que tinha mais de 21 anos no dia " + todays);
+                var bool;
+                if (_this.decision)
+                    bool = " não tinha ";
+                else
+                    bool = " tinha ";
+                val.unshift({ hdr: "Maior do que 21 anos", cnt: "Mostrei que" + bool + "mais de 21 anos.", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -556,7 +625,7 @@ var TabsPage = /** @class */ (function () {
         };
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/tabs/tabs.html"*/'<ion-tabs color="favorite">\n  <ion-tab [root]="tab1Root" [rootParams]="tabParams" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" [rootParams]="tabParams" tabTitle="QrCode" tabIcon="qr-scanner"></ion-tab>\n  <ion-tab [root]="tab3Root" [rootParams]="tabParams" tabTitle="History" tabIcon="paper"></ion-tab>\n  <ion-tab [root]="tab4Root" [rootParams]="tabParams" tabTitle="Settings" tabIcon="construct"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/tabs/tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/tabs/tabs.html"*/'<ion-tabs color="favorite">\n  <ion-tab [root]="tab1Root" [rootParams]="tabParams" tabTitle="Início" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" [rootParams]="tabParams" tabTitle="QR" tabIcon="qr-scanner"></ion-tab>\n  <ion-tab [root]="tab3Root" [rootParams]="tabParams" tabTitle="Histórico" tabIcon="paper"></ion-tab>\n  <ion-tab [root]="tab4Root" [rootParams]="tabParams" tabTitle="Definições" tabIcon="construct"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], TabsPage);
@@ -585,10 +654,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+/**
+ * Generated class for the HistoryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 var HistoryPage = /** @class */ (function () {
-    function HistoryPage(navParams, navCtrl) {
-        this.navParams = navParams;
+    function HistoryPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
+        this.navParams = navParams;
     }
     HistoryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
@@ -610,9 +685,13 @@ var HistoryPage = /** @class */ (function () {
     };
     HistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'history',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history != undefined">\n        <p class="item" *ngFor="let item of history">\n            {{item}}\n        </p>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/
+<<<<<<< HEAD
+            selector: 'history',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history != undefined">\n        <p class="item" *ngFor="let item of history">\n            {{item}}\n        </p>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/
+=======
+            selector: 'page-history',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history !== undefined">\n        <div *ngFor="let item of history">\n            <ion-card>\n              <ion-note item-end>\n                {{item.date}}\n              </ion-note>\n              <ion-card-header>\n                {{item.hdr}}\n              </ion-card-header>\n              <ion-card-content>\n                {{item.cnt}}\n              </ion-card-content>\n            </ion-card>\n        </div>\n      </div>\n</ion-content>\n  '/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/,
+>>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], HistoryPage);
     return HistoryPage;
 }());
@@ -908,7 +987,7 @@ var LockScreenPage = /** @class */ (function () {
     LockScreenPage.prototype.register = function (pincode) {
         var hash = String(__WEBPACK_IMPORTED_MODULE_5_crypto_js___default.a.SHA256(pincode));
         this.storage.set('password_encrypt', hash);
-        this.storage.set('settings', "");
+        this.storage.set('first', true);
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_0__key_key__["a" /* KeyPage */], {
             pincode: hash
         });
@@ -935,7 +1014,7 @@ var LockScreenPage = /** @class */ (function () {
     };
     LockScreenPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-lockscreen',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/'<!--\n  Generated template for the LockScreenPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n        Carta de Condução\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n  <ion-content padding>\n      <!--<h4 text-center>Insira o seu PIN</h4> -->\n    <div class="pin-container">\n      <button ion-button icon-only full (click)="openPinCode(false)" style="background-color: #32db64;">\n        <ion-icon name="lock"></ion-icon>\n      </button>\n        <button ion-button icon-only full (click)="startTouchID()" style="background-color: #32db64;">\n          <ion-icon name="finger-print"></ion-icon>\n        </button>\n    </div>  \n  </ion-content>\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/
+            selector: 'page-lockscreen',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/'<!--\n  Generated template for the LockScreenPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n        Carta de Condução\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n  <ion-content padding>\n      <!--<h4 text-center>Insira o seu PIN</h4> -->\n    <div class="pin-container">\n      <button ion-button icon-only full (click)="openPinCode(false)" style="background-color: #32db64;">\n        <ion-icon name="lock"></ion-icon>\n      </button>\n        <button ion-button icon-only full *ngIf="id" (click)="startTouchID()" style="background-color: #32db64;">\n          <ion-icon name="finger-print"></ion-icon>\n        </button>\n    </div>  \n  </ion-content>\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_ionic2_pincode_input_dist__["PincodeController"],
             __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_fingerprint_aio__["a" /* FingerprintAIO */]])

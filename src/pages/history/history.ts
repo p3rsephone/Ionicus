@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+/**
+ * Generated class for the HistoryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @Component({
-  selector: 'history',
-  templateUrl: 'history.html'
+  selector: 'page-history',
+  templateUrl: 'history.html',
 })
 export class HistoryPage {
-  history: any;
 
-  constructor(public navParams: NavParams, public navCtrl: NavController) {
+  history: any
 
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewWillEnter(){
@@ -29,5 +36,4 @@ export class HistoryPage {
       this.history=val;
     });
   }
-
 }

@@ -234,6 +234,13 @@ var SettingsPage = /** @class */ (function () {
         this.storage.remove('key');
         this.presentAlert("Feito", "Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
     };
+    SettingsPage.prototype.cleanHistory = function () {
+        var _this = this;
+        this.storage.remove('history').then(function (val) {
+            _this.storage.set('history', []);
+            _this.presentAlert("Feito", "O seu histórico foi removido.");
+        });
+    };
     SettingsPage.prototype.cleanToken = function () {
         this.storage.remove('token');
         this.storage.remove('key');
@@ -364,7 +371,11 @@ var SettingsPage = /** @class */ (function () {
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'settings',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/,
+=======
+            selector: 'settings',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="cleanHistory()">\n      Apagar histórico\n  </button>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/,
+>>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic2_pincode_input__["PincodeController"], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]])
     ], SettingsPage);
@@ -415,10 +426,12 @@ var QrCodePage = /** @class */ (function () {
             console.log(anos);
             var obj;
             if (anos >= 18) {
+                this.decision = true;
                 obj = "[{maior18:true}]";
                 this.output18 = obj;
             }
             else {
+                this.decision = false;
                 obj = "[{maior18:false}]";
                 this.output18 = obj;
             }
@@ -433,10 +446,12 @@ var QrCodePage = /** @class */ (function () {
             var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
             var obj;
             if (anos >= 21) {
+                this.decision = true;
                 obj = "[{maior21:true}]";
                 this.output21 = obj;
             }
             else {
+                this.decision = false;
                 obj = "[{maior21:false}]";
                 this.output21 = obj;
             }
@@ -470,7 +485,7 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei a minha informação toda no dia " + todays);
+                val.unshift({ hdr: "Toda a informação", cnt: "Mostrei toda a minha informação", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -497,7 +512,12 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei que tinha mais de 18 anos no dia " + todays);
+                var bool;
+                if (_this.decision)
+                    bool = " não tinha ";
+                else
+                    bool = " tinha ";
+                val.unshift({ hdr: "Maior do que 18 anos", cnt: "Mostrei que" + bool + "mais de 18 anos.", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -524,7 +544,12 @@ var QrCodePage = /** @class */ (function () {
                     mms = '0' + mm;
                 }
                 todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift("Mostrei que tinha mais de 21 anos no dia " + todays);
+                var bool;
+                if (_this.decision)
+                    bool = " não tinha ";
+                else
+                    bool = " tinha ";
+                val.unshift({ hdr: "Maior do que 21 anos", cnt: "Mostrei que" + bool + "mais de 21 anos.", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -625,10 +650,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+/**
+ * Generated class for the HistoryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 var HistoryPage = /** @class */ (function () {
-    function HistoryPage(navParams, navCtrl) {
-        this.navParams = navParams;
+    function HistoryPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
+        this.navParams = navParams;
     }
     HistoryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
@@ -650,9 +681,13 @@ var HistoryPage = /** @class */ (function () {
     };
     HistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'history',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history != undefined">\n        <p class="item" *ngFor="let item of history">\n            {{item}}\n        </p>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/
+=======
+            selector: 'page-history',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history !== undefined">\n        <div *ngFor="let item of history">\n            <ion-card>\n              <ion-note item-end>\n                {{item.date}}\n              </ion-note>\n              <ion-card-header>\n                {{item.hdr}}\n              </ion-card-header>\n              <ion-card-content>\n                {{item.cnt}}\n              </ion-card-content>\n            </ion-card>\n        </div>\n      </div>\n</ion-content>\n  '/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/,
+>>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], HistoryPage);
     return HistoryPage;
 }());
@@ -975,7 +1010,11 @@ var LockScreenPage = /** @class */ (function () {
     };
     LockScreenPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'page-lockscreen',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/'<!--\n  Generated template for the LockScreenPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n        Carta de Condução\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n  <ion-content padding>\n      <!--<h4 text-center>Insira o seu PIN</h4> -->\n    <div class="pin-container">\n      <button ion-button icon-only full (click)="openPinCode(false)" style="background-color: #32db64;">\n        <ion-icon name="lock"></ion-icon>\n      </button>\n        <button ion-button icon-only full *ngIf="id" (click)="startTouchID()" style="background-color: #32db64;">\n          <ion-icon name="finger-print"></ion-icon>\n        </button>\n    </div>  \n  </ion-content>\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/
+=======
+            selector: 'page-lockscreen',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/'<!--\n  Generated template for the LockScreenPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n        Carta de Condução\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n  <ion-content padding>\n      <!--<h4 text-center>Insira o seu PIN</h4> -->\n    <div class="pin-container">\n      <button ion-button icon-only full (click)="openPinCode(false)" style="background-color: #32db64;">\n        <ion-icon name="lock"></ion-icon>\n      </button>\n        <button ion-button icon-only full *ngIf="id" (click)="startTouchID()" style="background-color: #32db64;">\n          <ion-icon name="finger-print"></ion-icon>\n        </button>\n    </div>  \n  </ion-content>\n'/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/lock-screen/lock-screen.html"*/
+>>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_ionic2_pincode_input_dist__["PincodeController"],
             __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_fingerprint_aio__["a" /* FingerprintAIO */]])

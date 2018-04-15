@@ -48,6 +48,13 @@ export class SettingsPage {
     this.presentAlert("Feito","Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
   }
 
+  cleanHistory(){
+    this.storage.remove('history').then(val => {
+      this.storage.set('history', []);
+      this.presentAlert("Feito","O seu histórico foi removido.");
+    });
+  }
+
   cleanToken(){
     this.storage.remove('token');
     this.storage.remove('key');

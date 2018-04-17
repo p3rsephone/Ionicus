@@ -35,16 +35,9 @@ export class QrCodePage {
       console.log(anos);
       var obj;
       
-      if(anos>=18){
-        this.decision = true;
-        obj = "[{maior18:true}]";
-        this.output18 = obj;
-      }
-      else{
-        this.decision = false;
-        obj  = "[{maior18:false}]";
-        this.output18 = obj;
-      }
+      this.decision = (anos>=18);
+      obj = '[{"maior18":'+ this.decision + '}]';
+      this.output18 = obj;
     }
   }
 
@@ -57,22 +50,15 @@ export class QrCodePage {
       var anos = Math.abs(ageDate.getUTCFullYear() - 1970);
       var obj
 
-      if(anos>=21){
-        this.decision = true;
-        obj = "[{maior21:true}]";
-        this.output21 = obj;
-      }
-      else{
-        this.decision = false
-        obj = "[{maior21:false}]";
-        this.output21 = obj;
-      }
+      this.decision = (anos>=21)
+      obj = '[{"maior21":'+ this.decision +'}]';
+      this.output21 = obj;
     }
   }
 
   infoArray(){
     if(this.items!=undefined){
-      var jstr = '[{site:"http://dev-ionicus.herokuapp.com/users/'+ this.key +'"}]';
+      var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/'+ this.key +'","token":"'+this.token+'"}]';
       this.allinfo = jstr;
     }
   }

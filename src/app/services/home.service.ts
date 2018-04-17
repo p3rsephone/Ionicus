@@ -41,7 +41,7 @@ export class HomeService{
               pin: key
             });
             
-            return new Promise((resolve, reject) => {
+            new Promise((resolve, reject) => {
               this.http.post(this.baseUrl+'auth/login', data, options)
               .toPromise()
               .then((response) =>
@@ -56,5 +56,8 @@ export class HomeService{
                 reject(error.json());
               });
             });
+
+            return this.http.post(this.baseUrl+'auth/login', data, options)
+                            .map(res => res.json());
     }
 }

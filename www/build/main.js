@@ -372,10 +372,14 @@ var SettingsPage = /** @class */ (function () {
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
 <<<<<<< HEAD
+<<<<<<< HEAD
             selector: 'settings',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/,
 =======
             selector: 'settings',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="cleanHistory()">\n      Apagar histórico\n  </button>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/settings/settings.html"*/,
 >>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
+=======
+            selector: 'settings',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n      Definições\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      Segurança e Privacidade\n    </ion-list-header>\n    <button ion-item (click)="resetPassword()">\n      <ion-icon name="lock" item-start></ion-icon>\n      Alterar o PIN\n    </button>\n    <ion-item>\n        <ion-label>Touch ID</ion-label>\n        <ion-icon name="finger-print" item-start></ion-icon>\n        <ion-toggle [(ngModel)]="faio" (ionChange)="toggleFaio()"></ion-toggle>\n    </ion-item>\n    <ion-list-header>\n      Dados pessoais\n    </ion-list-header>\n    <button ion-item block outline color="danger" (click)="cleanHistory()">\n      Apagar histórico\n  </button>\n    <button ion-item block outline color="danger" (click)="resetToken()">\n        Apagar chave única\n    </button>\n    <button ion-item block outline color="danger" (click)="resetAlert()">\n        Apagar todos os dados\n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/settings/settings.html"*/,
+>>>>>>> dc3fa88483a68ab37704a93d7fbe39f2d1a79fa2
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic2_pincode_input__["PincodeController"], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]])
     ], SettingsPage);
@@ -478,14 +482,8 @@ var QrCodePage = /** @class */ (function () {
                 var mm = today.getMonth() + 1;
                 var yyyy = today.getFullYear();
                 var dds, mms, todays;
-                if (dd < 10) {
-                    dds = '0' + dd;
-                }
-                if (mm < 10) {
-                    mms = '0' + mm;
-                }
-                todays = mm + '/' + dd + '/' + yyyy;
-                val.unshift({ hdr: "Toda a informação", cnt: "Mostrei toda a minha informação", date: todays });
+                todays = dd + '/' + mm + '/' + yyyy;
+                val.unshift({ hdr: "Toda a informação", cnt: "Mostrei toda a minha informação.", date: todays });
                 _this.navParams.get('storage').set('history', val);
             });
         }
@@ -504,14 +502,8 @@ var QrCodePage = /** @class */ (function () {
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1;
                 var yyyy = today.getFullYear();
-                var dds, mms, todays;
-                if (dd < 10) {
-                    dds = '0' + dd;
-                }
-                if (mm < 10) {
-                    mms = '0' + mm;
-                }
-                todays = mm + '/' + dd + '/' + yyyy;
+                var todays;
+                todays = dd + '/' + mm + '/' + yyyy;
                 var bool;
                 if (_this.decision)
                     bool = " não tinha ";
@@ -536,14 +528,8 @@ var QrCodePage = /** @class */ (function () {
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1;
                 var yyyy = today.getFullYear();
-                var dds, mms, todays;
-                if (dd < 10) {
-                    dds = '0' + dd;
-                }
-                if (mm < 10) {
-                    mms = '0' + mm;
-                }
-                todays = mm + '/' + dd + '/' + yyyy;
+                var todays;
+                todays = dd + '/' + mm + '/' + yyyy;
                 var bool;
                 if (_this.decision)
                     bool = " não tinha ";
@@ -682,10 +668,14 @@ var HistoryPage = /** @class */ (function () {
     HistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
 <<<<<<< HEAD
+<<<<<<< HEAD
             selector: 'history',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history != undefined">\n        <p class="item" *ngFor="let item of history">\n            {{item}}\n        </p>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/
 =======
             selector: 'page-history',template:/*ion-inline-start:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history !== undefined">\n        <div *ngFor="let item of history">\n            <ion-card>\n              <ion-note item-end>\n                {{item.date}}\n              </ion-note>\n              <ion-card-header>\n                {{item.hdr}}\n              </ion-card-header>\n              <ion-card-content>\n                {{item.cnt}}\n              </ion-card-content>\n            </ion-card>\n        </div>\n      </div>\n</ion-content>\n  '/*ion-inline-end:"/Volumes/MacintoshHD/tdosilva/Projects/Ionic/Ionicus/src/pages/history/history.html"*/,
 >>>>>>> 5a9372b585a8cb29ca1f3e38b44b08095784fc32
+=======
+            selector: 'page-history',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Histórico\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n    <div *ngIf="history !== undefined">\n        <div *ngFor="let item of history">\n            <ion-card>\n              <ion-note item-end>\n                {{item.date}}\n              </ion-note>\n              <ion-card-header>\n                {{item.hdr}}\n              </ion-card-header>\n              <ion-card-content>\n                {{item.cnt}}\n              </ion-card-content>\n            </ion-card>\n        </div>\n      </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/history/history.html"*/,
+>>>>>>> dc3fa88483a68ab37704a93d7fbe39f2d1a79fa2
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], HistoryPage);
@@ -721,10 +711,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var KeyPage = /** @class */ (function () {
-    function KeyPage(navCtrl, storage, homeService) {
+    function KeyPage(navCtrl, storage, homeService, alertCtrl) {
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.homeService = homeService;
+        this.alertCtrl = alertCtrl;
         this.show = false;
     }
     KeyPage.prototype.ngOnInit = function () {
@@ -748,28 +739,74 @@ var KeyPage = /** @class */ (function () {
         });
     };
     KeyPage.prototype.toggleKey = function () {
+        var _this = this;
         if (this.key != undefined) {
-            this.showT = true;
-            this.show = false;
-            this.homeService.getToken(this.key);
+            this.homeService.getToken(this.key).subscribe(function (response) {
+                _this.error = response;
+                if (_this.error.status == "error") {
+                    var alert_1 = _this.alertCtrl.create({
+                        title: "ERRO",
+                        subTitle: "Chave única errada",
+                        buttons: [
+                            {
+                                text: 'Ok',
+                                role: 'ok'
+                            }
+                        ]
+                    });
+                    alert_1.present();
+                }
+                else {
+                    _this.show = false;
+                    _this.showT = true;
+                }
+            });
         }
     };
+    KeyPage.prototype.toggleBC = function () {
+        this.show = true;
+        this.showT = false;
+    };
     KeyPage.prototype.toggleToken = function () {
+        var _this = this;
         if ((this.key != undefined) && (this.token != undefined)) {
-            var array = [];
-            this.storage.set('key', this.key);
-            this.storage.set('history', array);
-            this.storage.set('token', this.token);
-            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */], {
-                storage: this.storage
+            this.homeService.getPosts(this.key, this.token).subscribe(function (response) {
+                _this.item = response;
+                console.log(_this.item.status);
+                if (_this.item.status == "error") {
+                    var alert_2 = _this.alertCtrl.create({
+                        title: "ERRO",
+                        subTitle: "Token errado",
+                        buttons: [
+                            {
+                                text: 'Ok',
+                                role: 'ok'
+                            }
+                        ]
+                    });
+                    alert_2.present();
+                }
+                else {
+                    var array = [];
+                    _this.storage.set('key', _this.key);
+                    _this.storage.set('history', array);
+                    _this.storage.set('token', _this.token);
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */], {
+                        storage: _this.storage
+                    });
+                }
             });
         }
     };
     KeyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'key',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Chave Móvel Digital\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n  <form *ngIf="show" (ngSubmit)="toggleKey()">\n      <ion-item>\n        <ion-label>Chave Móvel Digital:</ion-label>\n        <ion-textarea [(ngModel)]="key" name="key"></ion-textarea>\n      </ion-item>\n      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n  </form>\n  <form *ngIf="showT" (ngSubmit)="toggleToken()">\n      <ion-item>\n        <ion-label>Token:</ion-label>\n        <ion-textarea [(ngModel)]="token" name="token"></ion-textarea>\n      </ion-item>\n      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n  </form>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/
+=======
+            selector: 'key',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          Chave Móvel Digital\n      </ion-title>\n    </ion-navbar>\n</ion-header>\n  \n<ion-content padding>\n  <form *ngIf="show" (ngSubmit)="toggleKey()">\n      <ion-item>\n        <ion-label>Chave Móvel Digital:</ion-label>\n        <ion-textarea [(ngModel)]="key" name="key"></ion-textarea>\n      </ion-item>\n      <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n  </form>\n  <div *ngIf="showT">\n    <form (ngSubmit)="toggleToken()">\n        <ion-item>\n          <ion-label>Token:</ion-label>\n          <ion-textarea [(ngModel)]="token" name="token"></ion-textarea>\n        </ion-item>\n        <button ion-button type="submit" block style="background-color: #32db64;">Confirmar</button>\n    </form>\n    <form (ngSubmit)="toggleBC()">\n        <button ion-button type="submit" block style="background-color: #32db64;">Voltar Atrás</button>\n    </form>\n    </div>\n</ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/key/key.html"*/
+>>>>>>> dc3fa88483a68ab37704a93d7fbe39f2d1a79fa2
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__app_services_home_service__["a" /* HomeService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__app_services_home_service__["a" /* HomeService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], KeyPage);
     return KeyPage;
 }());
@@ -1256,7 +1293,7 @@ var HomeService = /** @class */ (function () {
         var data = JSON.stringify({
             pin: key
         });
-        return new Promise(function (resolve, reject) {
+        new Promise(function (resolve, reject) {
             _this.http.post(_this.baseUrl + 'auth/login', data, options)
                 .toPromise()
                 .then(function (response) {
@@ -1269,6 +1306,8 @@ var HomeService = /** @class */ (function () {
                 reject(error.json());
             });
         });
+        return this.http.post(this.baseUrl + 'auth/login', data, options)
+            .map(function (res) { return res.json(); });
     };
     HomeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),

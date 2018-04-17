@@ -44,6 +44,13 @@ export class LockScreenPage {
       }
     })
     .catch((error: any) => console.log(error))
+    this.storage.get('faio').then (faio =>{
+      if (faio) {
+        setTimeout(() => {
+          this.startTouchID();
+        }, 4000);
+      }
+    })
   }
 
   openPinCode(register: boolean): any {
@@ -117,6 +124,7 @@ export class LockScreenPage {
         }
       )
     })
+    .catch((error: any) => console.log(error))
   }
 
   presentAlert(title: string, message: string, register: boolean) {

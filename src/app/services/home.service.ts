@@ -40,22 +40,6 @@ export class HomeService{
             let data = JSON.stringify({
               pin: key
             });
-            
-            new Promise((resolve, reject) => {
-              this.http.post(this.baseUrl+'auth/login', data, options)
-              .toPromise()
-              .then((response) =>
-              {
-                console.log('API Response : ', response.json());
-                resolve(response.json());
-              })
-              .catch((error) =>
-              {
-                console.error('API Error : ', error.status);
-                console.error('API Error : ', JSON.stringify(error));
-                reject(error.json());
-              });
-            });
 
             return this.http.post(this.baseUrl+'auth/login', data, options)
                             .map(res => res.json());

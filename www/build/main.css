@@ -33621,6 +33621,15 @@ ion-content {
 /*h4 {
 	color: #c5dbff;
 }*/
+qr ion-content {
+  background: #ffffff;
+}
+
+qr img {
+  height: 100%;
+  width: 100%;
+}
+
 qrcode ion-content {
   background: #ffffff;
 }

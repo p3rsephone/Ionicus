@@ -27,7 +27,22 @@ export class HomePage {
   photo: any;
   ass: any;
   loading: any;
-  storage: any
+  storage: any;
+  AM: any;
+  A1: any;
+  A2: any;
+  A: any;
+  B1: any;
+  B: any;
+  C1: any;
+  C: any;
+  D1: any;
+  D: any;
+  BE: any;
+  C1E: any;
+  CE: any;
+  D1E: any;
+  DE: any;
 
   constructor(public loadingCtrl: LoadingController, public plt: Platform, public navCtrl: NavController, 
     public sanitizer: DomSanitizer, public navParams: NavParams, private homeService: HomeService, private alertCtrl: AlertController) {
@@ -94,6 +109,7 @@ export class HomePage {
           this.item =response;
           this.getPhoto();
           this.getAss();
+          this.indice();
           this.loading.dismiss();
         });
   }
@@ -124,5 +140,29 @@ export class HomePage {
   toggleTF(){
     this.tback=false;
     this.tfront=true;
+  }
+
+  indice(){
+    this.AM = -1;
+    this.A1 = -1;
+    this.A2 = -1;
+    this.A = -1;
+    this.B1 = -1;
+    this.B = -1;
+    this.C1 = -1;
+    this.C = -1;
+    this.D1 = -1;
+    this.D = -1;
+    this.BE = -1;
+    this.C1E = -1;
+    this.CE = -1;
+    this.D1E = -1;
+    this.DE = -1;
+    var number = 0;
+    this.item.types.forEach(element => {
+      if(this.item.types[number]['name']=='B'){
+        this.B = number;
+      }
+    });
   }
 }

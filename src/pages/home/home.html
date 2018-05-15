@@ -59,7 +59,7 @@
             <img class="imagem3" [src]="photo">
           </ion-thumbnail>
         </div>
-        <div class="column">
+        <div class="column2">
           <p>
             <b>1.</b> {{item.surname}}
           </p>
@@ -84,6 +84,12 @@
               <img class="imagem2" [src]="ass">
             </ion-thumbnail>
           </p>
+          <p>
+            <b>8.</b> -
+          </p>
+          <p>
+            <b style="visibility: hidden">8.</b> -
+          </p>
         </div>
       </div>
       <div (click)="toggleTF()" class="row2" *ngIf="show2 && item && tback">
@@ -91,16 +97,251 @@
           <table>
               <tr>
                 <th>9.</th>
+                <th style="visibility: hidden;">9.</th>
                 <th>10.</th>
                 <th>11.</th>
                 <th>12.</th>
               </tr>
-              <tr *ngFor="let car of item.types; let in = index">
-                <td>{{item.types[in]['name']}} </td>
+              <tr *ngIf="((AM != -1) && (AM != undefined)); else othercontentam">
+                <td>{{item.types[AM]['name']}} </td>
                 <td><ion-icon name="car"></ion-icon></td>
-                <td>{{item.types[in]['firstDate']}} </td>
-                <td>{{item.types[in]['validUntil']}} </td>
-              </tr> 
+                <td>{{item.types[AM]['firstDate']}} </td>
+                <td>{{item.types[AM]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((A1 != -1) && (A1 != undefined)); else othercontenta1">
+                <td>{{item.types[A1]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[A1]['firstDate']}} </td>
+                <td>{{item.types[A1]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((A2 != -1) && (A2 != undefined)); else othercontenta2">
+                <td>{{item.types[A2]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[A2]['firstDate']}} </td>
+                <td>{{item.types[A2]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((A != -1) && (A != undefined)); else othercontenta">
+                <td>{{item.types[A]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[A]['firstDate']}} </td>
+                <td>{{item.types[A]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((B1 != -1) && (B1 != undefined)); else othercontenb1">
+                <td>{{item.types[B1]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[B1]['firstDate']}} </td>
+                <td>{{item.types[B1]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((B != -1) && (B != undefined)); else othercontentb">
+                <td>{{item.types[B]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[B]['firstDate']}} </td>
+                <td>{{item.types[B]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((C1 != -1) && (C1 != undefined)); else othercontentc1">
+                <td>{{item.types[C1]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[C1]['firstDate']}} </td>
+                <td>{{item.types[C1]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((C != -1) && (C != undefined)); else othercontentc">
+                <td>{{item.types[C]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[C]['firstDate']}} </td>
+                <td>{{item.types[C]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((D1 != -1) && (D1 != undefined)); else othercontentd1">
+                <td>{{item.types[D1]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[D1]['firstDate']}} </td>
+                <td>{{item.types[D1]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((D != -1) && (D != undefined)); else othercontentd">
+                <td>{{item.types[D]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[D]['firstDate']}} </td>
+                <td>{{item.types[D]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((BE != -1) && (BE != undefined)); else othercontentbe">
+                <td>{{item.types[BE]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[BE]['firstDate']}} </td>
+                <td>{{item.types[BE]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((C1E != -1) && (C1E != undefined)); else othercontentc1e">
+                <td>{{item.types[C1E]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[C1E]['firstDate']}} </td>
+                <td>{{item.types[C1E]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((CE != -1) && (CE != undefined)); else othercontentce">
+                <td>{{item.types[CE]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[CE]['firstDate']}} </td>
+                <td>{{item.types[CE]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((D1E != -1) && (D1E != undefined)); else othercontentd1e">
+                <td>{{item.types[D1E]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[D1E]['firstDate']}} </td>
+                <td>{{item.types[D1E]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <tr *ngIf="((DE != -1) && (DE != undefined)); else othercontentde">
+                <td>{{item.types[DE]['name']}} </td>
+                <td><ion-icon name="car"></ion-icon></td>
+                <td>{{item.types[DE]['firstDate']}} </td>
+                <td>{{item.types[DE]['validUntil']}} </td>
+                <td></td>
+              </tr>
+              <ng-template #othercontentam >
+                <tr>
+                    <td>AM</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontenta1 >
+                <tr>
+                    <td>A1</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontenta2 >
+                <tr>
+                    <td>A2</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontenta >
+                <tr>
+                    <td>A</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentb >
+                <tr>
+                    <td>B</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentb1 >
+                <tr>
+                    <td>B1</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentc1 >
+                <tr>
+                    <td>C1</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentc >
+                <tr>
+                    <td>C</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentd1 >
+                <tr>
+                    <td>D1</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentd >
+                <tr>
+                    <td>D</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentbe >
+                <tr>
+                    <td>BE</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentc1e >
+                <tr>
+                    <td>C1E</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentce >
+                <tr>
+                    <td>CE</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentd1e >
+                <tr>
+                    <td>D1</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
+              <ng-template #othercontentde >
+                <tr>
+                    <td>DE</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td>***</td>
+                    <td></td>
+                </tr>
+              </ng-template>
           </table>
         </div>
       </div>        

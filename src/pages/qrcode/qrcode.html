@@ -8,22 +8,19 @@
   
   <ion-content padding>
     <div class="card">
-      <button (click)="toggleAllInfo()" ion-button block style="background-color: #ffffff; color: #000000">{{showAll ? "Partilhar toda a informação" : "Partilhar toda a informação"}}</button>
-      <div *ngIf="showAll">
-        <ngx-qrcode [qrc-value]="allinfo" [qrc-version]=5 qrc-errorCorrectionLevel = "L"></ngx-qrcode>
-      </div>
+      <button (click)="toggleAllInfo()" ion-button block style="background-color: #ffffff; color: #000000">Partilhar toda a informação</button>
     </div>
     <div class="card">
-      <button (click)="toggle18()" ion-button block style="background-color: #ffffff; color: #000000">{{show18 ? "Sou maior de 18" : "Sou maior de 18"}}</button>
-      <div *ngIf="show18">
-        <ngx-qrcode [qrc-value]="output18"></ngx-qrcode>
-      </div>
+      <button (click)="toggle18()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 18</button>
     </div>
     <div class="card">
-      <button (click)="toggle21()" ion-button block style="background-color: #ffffff; color: #000000">{{show21 ? "Sou maior de 21" : "Sou maior de 21"}}</button>
-      <div *ngIf="show21">
-        <ngx-qrcode [qrc-value]="output21"></ngx-qrcode>
-      </div>
+      <button (click)="toggle21()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 21</button>
+    </div>
+    <div class="card">
+      <button (click)="toggleEco()" ion-button block style="background-color: #ffffff; color: #000000">Alugar Scooter</button>
+    </div>
+    <div class="card">
+      <button (click)="toggleSC()" ion-button block style="background-color: #ffffff; color: #000000">Jogar na Santa Casa</button>
     </div>
   </ion-content>
   

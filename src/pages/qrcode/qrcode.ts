@@ -227,7 +227,7 @@ export class QrCodePage {
 
   getUser(){
     this.alljson.users.forEach(element => {
-      if(element.secret == this.token) this.items=element;
+      if((element.secret == this.token) && (element.digital_key == this.key)) this.items=element;
     });
   }
 }

@@ -132,7 +132,7 @@ export class HomePage {
 
   getUser(){
     this.alljson.users.forEach(element => {
-      if(element.secret == this.token) this.item=element;
+      if((element.secret == this.token) && (element.digital_key == this.key)) this.item=element;
     });
   }
 

@@ -45,6 +45,7 @@ export class SettingsPage {
     this.storage.set('faio', false);
     this.storage.remove('token');
     this.storage.remove('key');
+    this.storage.remove('users');
     this.presentAlert("Feito","Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
   }
 

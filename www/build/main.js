@@ -70,7 +70,20 @@ var HomePage = /** @class */ (function () {
             _this.key = val;
             _this.navParams.get('storage').get('token').then(function (val2) {
                 _this.token = val2;
-                _this.getPosts();
+                _this.navParams.get('storage').get('users').then(function (users) {
+                    if (users) {
+                        _this.loading.present();
+                        _this.alljson = users;
+                        _this.getUser();
+                        _this.getPhoto();
+                        _this.getAss();
+                        _this.indice();
+                        _this.loading.dismiss();
+                    }
+                    else {
+                        _this.getPosts();
+                    }
+                });
             });
         });
     };
@@ -116,10 +129,20 @@ var HomePage = /** @class */ (function () {
         var _this = this;
         this.loading.present();
         this.homeService.getPosts(this.key, this.token).subscribe(function (response) {
-            _this.item = response;
+            _this.alljson = response;
+            _this.storage.set('users', _this.alljson);
+            _this.getUser();
             _this.getPhoto();
             _this.getAss();
+            _this.indice();
             _this.loading.dismiss();
+        });
+    };
+    HomePage.prototype.getUser = function () {
+        var _this = this;
+        this.alljson.users.forEach(function (element) {
+            if ((element.secret == _this.token) && (element.digital_key == _this.key))
+                _this.item = element;
         });
     };
     HomePage.prototype.getPhoto = function () {
@@ -144,9 +167,33 @@ var HomePage = /** @class */ (function () {
         this.tback = false;
         this.tfront = true;
     };
+    HomePage.prototype.indice = function () {
+        var _this = this;
+        this.AM = -1;
+        this.A1 = -1;
+        this.A2 = -1;
+        this.A = -1;
+        this.B1 = -1;
+        this.B = -1;
+        this.C1 = -1;
+        this.C = -1;
+        this.D1 = -1;
+        this.D = -1;
+        this.BE = -1;
+        this.C1E = -1;
+        this.CE = -1;
+        this.D1E = -1;
+        this.DE = -1;
+        var number = 0;
+        this.item.types.forEach(function (element) {
+            if (_this.item.types[number]['name'] == 'B') {
+                _this.B = number;
+            }
+        });
+    };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/'<!--\n  Generated template for the HomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="favorite">\n    <ion-title text-center>Carta de Condução</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Vista Moderna</button>\n    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Carta Tradicional</button>\n    <div class="card" *ngIf="show1 && item">\n          <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem" [src]="photo">\n          </ion-thumbnail>\n          <div class="container">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{item.birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n                <img class="imagem" [src]="ass">\n            </ion-thumbnail>\n          </p>\n          <ion-list *ngFor="let car of item.types; let in = index">\n            <p>\n              <ion-icon name="car"></ion-icon>\n              <b>classe:</b>  {{item.types[in][\'name\']}}  \n              <b>s:</b> {{item.types[in][\'firstDate\']}} \n              <b>f:</b> {{item.types[in][\'validUntil\']}} \n            </p>\n          </ion-list>\n        </div>\n      </div>\n      <div (click)="toggleTB()" class="row" *ngIf="show2 && item && tfront">\n        <div class="column">\n          <ion-thumbnail *ngIf="item.photo">\n            <img class="imagem3" [src]="photo">\n          </ion-thumbnail>\n        </div>\n        <div class="column">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem2" [src]="ass">\n            </ion-thumbnail>\n          </p>\n        </div>\n      </div>\n      <div (click)="toggleTF()" class="row2" *ngIf="show2 && item && tback">\n        <div class="back">\n          <table>\n              <tr>\n                <th>9.</th>\n                <th>10.</th>\n                <th>11.</th>\n                <th>12.</th>\n              </tr>\n              <tr *ngFor="let car of item.types; let in = index">\n                <td>{{item.types[in][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[in][\'firstDate\']}} </td>\n                <td>{{item.types[in][\'validUntil\']}} </td>\n              </tr> \n          </table>\n        </div>\n      </div>        \n</ion-content>\n\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/'<!--\n  Generated template for the HomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="favorite">\n    <ion-title text-center>Carta de Condução</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <button (click)="toggleB1()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Vista Moderna</button>\n    <button (click)="toggleB2()" ion-button block style="background-color: #ffffff; color: #000000">Mostrar Carta Tradicional</button>\n    <div class="card" *ngIf="show1 && item">\n          <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem" [src]="photo">\n          </ion-thumbnail>\n          <div class="container">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{item.birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n                <img class="imagem" [src]="ass">\n            </ion-thumbnail>\n          </p>\n          <ion-list *ngFor="let car of item.types; let in = index">\n            <p>\n              <ion-icon name="car"></ion-icon>\n              <b>classe:</b>  {{item.types[in][\'name\']}}  \n              <b>s:</b> {{item.types[in][\'firstDate\']}} \n              <b>f:</b> {{item.types[in][\'validUntil\']}} \n            </p>\n          </ion-list>\n        </div>\n      </div>\n      <div (click)="toggleTB()" class="row" *ngIf="show2 && item && tfront">\n        <div class="column">\n          <ion-thumbnail *ngIf="item.photo">\n            <img class="imagem3" [src]="photo">\n          </ion-thumbnail>\n        </div>\n        <div class="column2">\n          <p>\n            <b>1.</b> {{item.surname}}\n          </p>\n          <p>\n            <b>2.</b> {{item.name}}\n          </p>\n          <p>\n            <b>3.</b> {{item.birthday}} {{birthSite}}\n          </p>\n          <p>\n            <b>4a.</b> {{item.emissionDate}} <b>4b.</b> {{item.emissionEntity}}\n          </p>\n          <p>\n            <b>4c.</b> {{item.valideDate}} <b>4d.</b> {{item.numberOfControll}}\n          </p>\n          <p>\n            <b>5.</b> {{item.licenseNumber}}\n          </p>\n          <p>\n            <b>7.</b> \n            <ion-thumbnail *ngIf="item.ass">\n              <img class="imagem2" [src]="ass">\n            </ion-thumbnail>\n          </p>\n          <p>\n            <b>8.</b> -\n          </p>\n          <p>\n            <b style="visibility: hidden">8.</b> -\n          </p>\n        </div>\n      </div>\n      <div (click)="toggleTF()" class="row2" *ngIf="show2 && item && tback">\n        <div class="back">\n          <table>\n              <tr>\n                <th>9.</th>\n                <th style="visibility: hidden;">9.</th>\n                <th>10.</th>\n                <th>11.</th>\n                <th>12.</th>\n              </tr>\n              <tr *ngIf="((AM != -1) && (AM != undefined)); else othercontentam">\n                <td>{{item.types[AM][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[AM][\'firstDate\']}} </td>\n                <td>{{item.types[AM][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((A1 != -1) && (A1 != undefined)); else othercontenta1">\n                <td>{{item.types[A1][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[A1][\'firstDate\']}} </td>\n                <td>{{item.types[A1][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((A2 != -1) && (A2 != undefined)); else othercontenta2">\n                <td>{{item.types[A2][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[A2][\'firstDate\']}} </td>\n                <td>{{item.types[A2][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((A != -1) && (A != undefined)); else othercontenta">\n                <td>{{item.types[A][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[A][\'firstDate\']}} </td>\n                <td>{{item.types[A][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((B1 != -1) && (B1 != undefined)); else othercontenb1">\n                <td>{{item.types[B1][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[B1][\'firstDate\']}} </td>\n                <td>{{item.types[B1][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((B != -1) && (B != undefined)); else othercontentb">\n                <td>{{item.types[B][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[B][\'firstDate\']}} </td>\n                <td>{{item.types[B][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((C1 != -1) && (C1 != undefined)); else othercontentc1">\n                <td>{{item.types[C1][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[C1][\'firstDate\']}} </td>\n                <td>{{item.types[C1][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((C != -1) && (C != undefined)); else othercontentc">\n                <td>{{item.types[C][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[C][\'firstDate\']}} </td>\n                <td>{{item.types[C][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((D1 != -1) && (D1 != undefined)); else othercontentd1">\n                <td>{{item.types[D1][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[D1][\'firstDate\']}} </td>\n                <td>{{item.types[D1][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((D != -1) && (D != undefined)); else othercontentd">\n                <td>{{item.types[D][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[D][\'firstDate\']}} </td>\n                <td>{{item.types[D][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((BE != -1) && (BE != undefined)); else othercontentbe">\n                <td>{{item.types[BE][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[BE][\'firstDate\']}} </td>\n                <td>{{item.types[BE][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((C1E != -1) && (C1E != undefined)); else othercontentc1e">\n                <td>{{item.types[C1E][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[C1E][\'firstDate\']}} </td>\n                <td>{{item.types[C1E][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((CE != -1) && (CE != undefined)); else othercontentce">\n                <td>{{item.types[CE][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[CE][\'firstDate\']}} </td>\n                <td>{{item.types[CE][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((D1E != -1) && (D1E != undefined)); else othercontentd1e">\n                <td>{{item.types[D1E][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[D1E][\'firstDate\']}} </td>\n                <td>{{item.types[D1E][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <tr *ngIf="((DE != -1) && (DE != undefined)); else othercontentde">\n                <td>{{item.types[DE][\'name\']}} </td>\n                <td><ion-icon name="car"></ion-icon></td>\n                <td>{{item.types[DE][\'firstDate\']}} </td>\n                <td>{{item.types[DE][\'validUntil\']}} </td>\n                <td></td>\n              </tr>\n              <ng-template #othercontentam >\n                <tr>\n                    <td>AM</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontenta1 >\n                <tr>\n                    <td>A1</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontenta2 >\n                <tr>\n                    <td>A2</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontenta >\n                <tr>\n                    <td>A</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentb >\n                <tr>\n                    <td>B</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentb1 >\n                <tr>\n                    <td>B1</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentc1 >\n                <tr>\n                    <td>C1</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentc >\n                <tr>\n                    <td>C</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentd1 >\n                <tr>\n                    <td>D1</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentd >\n                <tr>\n                    <td>D</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentbe >\n                <tr>\n                    <td>BE</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentc1e >\n                <tr>\n                    <td>C1E</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentce >\n                <tr>\n                    <td>CE</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentd1e >\n                <tr>\n                    <td>D1</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n              <ng-template #othercontentde >\n                <tr>\n                    <td>DE</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td>***</td>\n                    <td></td>\n                </tr>\n              </ng-template>\n          </table>\n        </div>\n      </div>        \n</ion-content>\n\n'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["c" /* DomSanitizer */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_services_home_service__["a" /* HomeService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
@@ -232,6 +279,7 @@ var SettingsPage = /** @class */ (function () {
         this.storage.set('faio', false);
         this.storage.remove('token');
         this.storage.remove('key');
+        this.storage.remove('users');
         this.presentAlert("Feito", "Todos os seus dados foram removidos. Reinicie a aplicação para terminar.");
     };
     SettingsPage.prototype.cleanHistory = function () {
@@ -439,7 +487,7 @@ var QrCodePage = /** @class */ (function () {
     };
     QrCodePage.prototype.infoArray = function () {
         if (this.items != undefined) {
-            var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/' + this.key + '","token":"' + this.token + '"}]';
+            var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/index/' + this.key + '","token":"' + this.token + '"}]';
             this.allinfo = jstr;
         }
     };
@@ -578,14 +626,30 @@ var QrCodePage = /** @class */ (function () {
             _this.key = val;
             _this.navParams.get('storage').get('token').then(function (val2) {
                 _this.token = val2;
-                _this.getPosts();
+                _this.navParams.get('storage').get('users').then(function (users) {
+                    if (users) {
+                        _this.alljson = users;
+                        _this.getUser();
+                    }
+                    else {
+                        _this.getPosts();
+                    }
+                });
             });
         });
     };
     QrCodePage.prototype.getPosts = function () {
         var _this = this;
         this.homeService.getPosts(this.key, this.token).subscribe(function (response) {
-            _this.items = response;
+            _this.alljson = response;
+            _this.getUser();
+        });
+    };
+    QrCodePage.prototype.getUser = function () {
+        var _this = this;
+        this.alljson.users.forEach(function (element) {
+            if ((element.secret == _this.token) && (element.digital_key == _this.key))
+                _this.items = element;
         });
     };
     QrCodePage = __decorate([
@@ -1351,7 +1415,7 @@ var HomeService = /** @class */ (function () {
         headers.append('Accept', 'application/json');
         headers.append('Authorization', 'Bearer ' + token);
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        return this.http.get(this.baseUrl + "users/" + key, options)
+        return this.http.get(this.baseUrl + "users/index/" + key, options)
             .map(function (res) { return res.json(); });
     };
     HomeService.prototype.getURL = function () {
@@ -1370,10 +1434,9 @@ var HomeService = /** @class */ (function () {
     };
     HomeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], HomeService);
     return HomeService;
-    var _a;
 }());
 
 //# sourceMappingURL=home.service.js.map

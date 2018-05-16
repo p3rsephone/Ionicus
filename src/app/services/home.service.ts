@@ -22,7 +22,7 @@ export class HomeService{
             headers.append('Authorization', 'Bearer ' + token);
 
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.baseUrl+"users/"+key, options)
+        return this.http.get(this.baseUrl+"users/index/"+key, options)
             .map(res => res.json());
     }
 

@@ -28,6 +28,7 @@ export class HomePage {
   ass: any;
   loading: any;
   storage: any;
+  alljson: any;
   AM: any;
   A1: any;
   A2: any;
@@ -57,12 +58,25 @@ export class HomePage {
   }
 
   ngOnInit() {
-      this.navParams.get('storage').get('key').then((val) => {
-        this.key= val;
-        this.navParams.get('storage').get('token').then((val2) => {
-          this.token=val2;
-          this.getPosts();
-        });
+    this.navParams.get('storage').get('key').then((val) => {
+      this.key= val;
+      this.navParams.get('storage').get('token').then((val2) => {
+        this.token=val2;
+              this.navParams.get('storage').get('users').then( users =>{
+              if(users){
+                this.loading.present();
+                this.alljson =  users;
+                this.getUser();
+                this.getPhoto();
+                this.getAss();
+                this.indice();
+                this.loading.dismiss();
+              }
+              else{
+                this.getPosts();
+              }
+            });
+          });
       });
   }
 
@@ -106,12 +120,20 @@ export class HomePage {
   getPosts(){
       this.loading.present();
       this.homeService.getPosts(this.key, this.token).subscribe(response => {
-          this.item =response;
+          this.alljson = response;
+          this.storage.set('users', this.alljson);
+          this.getUser();
           this.getPhoto();
           this.getAss();
           this.indice();
           this.loading.dismiss();
         });
+  }
+
+  getUser(){
+    this.alljson.users.forEach(element => {
+      if(element.secret == this.token) this.item=element;
+    });
   }
 
   getPhoto(){

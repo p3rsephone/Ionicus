@@ -10,6 +10,7 @@ import { QrPage } from '../qr/qr';
 })
 export class QrCodePage {
   items: any;
+  alljson: any;
   output18: any;
   output21: any;
   allinfo: any;
@@ -54,7 +55,7 @@ export class QrCodePage {
 
   infoArray(){
     if(this.items!=undefined){
-      var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/'+ this.key +'","token":"'+this.token+'"}]';
+      var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/index/'+ this.key +'","token":"'+this.token+'"}]';
       this.allinfo = jstr;
     }
   }
@@ -204,14 +205,29 @@ export class QrCodePage {
       this.key= val;
       this.navParams.get('storage').get('token').then((val2) => {
         this.token=val2;
-        this.getPosts();
+        this.navParams.get('storage').get('users').then( users =>{
+          if(users){
+            this.alljson =  users;
+            this.getUser();
+          }
+          else{
+            this.getPosts();
+          }
+        });
       });
     });
   }
 
   getPosts(){
     this.homeService.getPosts(this.key, this.token).subscribe(response => {
-        this.items =response;
+        this.alljson =response;
+        this.getUser();
+    });
+  }
+
+  getUser(){
+    this.alljson.users.forEach(element => {
+      if(element.secret == this.token) this.items=element;
     });
   }
 }

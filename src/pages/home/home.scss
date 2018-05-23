@@ -43,6 +43,50 @@ page-home {
         margin-top: 15%;
     }
 
+    @media only screen and (max-width: 2500px) {
+
+        .back td {
+            font-size:35px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size: 35px !important;
+        }
+
+        .column2 p {
+            font-size:35px;
+            margin: 0px;
+            padding: 15px;
+        }
+
+        .column2{
+            padding: 100px 0 20px 0 !important;
+        }
+    }
+
+    @media only screen and (max-width: 1500px) {
+
+        .back td {
+            font-size:25px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size: 25px !important;
+        }
+
+        .column2 p {
+            font-size:25px;
+            margin: 0px;
+            padding: 8px;
+        }
+
+        .column2{
+            padding: 90px 0 10px 0 !important;
+        }
+    }
+
     @media only screen and (max-width: 1000px) {
         .imagem3 {
             max-width: 350px;
@@ -51,6 +95,25 @@ page-home {
             height: 120px;
             margin-left: 30%;
             margin-top: 20%;
+        }
+
+        .back td {
+            font-size:20px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size: 20px !important;
+        }
+
+        .column2 p {
+            font-size:20px;
+            margin: 0px;
+            padding: 7px;
+        }
+
+        .column2{
+            padding: 70px 0 10px 0 !important;
         }
     }
 
@@ -63,6 +126,25 @@ page-home {
             margin-left: 30%;
             margin-top: 20%;
         }
+
+        .back td {
+            font-size:15px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size: 15px !important;
+        }
+
+        .column2 p {
+            font-size:15px;
+            margin: 0px;
+            padding: 5px;
+        }
+
+        .column2{
+            padding: 50px 0 10px 0 !important;
+        }
     }
 
     @media only screen and (max-width: 500px) {
@@ -74,6 +156,25 @@ page-home {
             margin-left: 30%;
             margin-top: 30%;
         }
+
+        .back td {
+            font-size:12px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size:12px !important;
+        }
+
+        .column2 p {
+            font-size:12px;
+            margin: 0px;
+            padding: 2px;
+        }
+
+        .column2{
+            padding: 35px 0 10px 0 !important;
+        }
     }
 
     @media only screen and (max-width: 350px) {
@@ -81,10 +182,30 @@ page-home {
             max-width: 350px;
             margin: auto;
             width: 50%;
-            height: 80px;
+            height: 60px;
             margin-left: 30%;
             margin-top: 40%;
         }
+
+        .back td {
+            font-size:9px !important;
+            padding: 1px;
+        }
+
+        .back th {
+            font-size:9px !important;
+        }
+
+        .column2 p {
+            font-size:9px;
+            margin: 0px;
+            padding: 1px;
+        }
+
+        .column2{
+            padding: 35px 0 10px 0 !important;
+        }
+
     }
 
     .row {
@@ -109,13 +230,12 @@ page-home {
     }
 
     .column2 {
-        padding: 50px 0 25px 0;
+        padding: 80px 0 25px 0;
         margin: auto;
         font-size: 80%;
         float: left;
         width: 70%;
     }
-    
     .row:after {
         content: "";
         display: table;

@@ -5,6 +5,15 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding *ngIf="name!='AM' && name!='AS' && name!='AC'">
   <ngx-qrcode [qrc-value]="qrData"></ngx-qrcode>
-</ion-content>  
+</ion-content>
+<ion-content padding *ngIf="name=='AM'">
+  <img class="qr" src="assets/imgs/QRCODE_APOSTA_MÚLTIPLA.PNG">
+</ion-content>
+<ion-content padding *ngIf="name=='AS'">
+  <img class="qr" src="assets/imgs/QRCODE_APOSTA_SIMPLES.PNG">
+</ion-content>
+<ion-content padding *ngIf="name=='AC'">
+  <img class="qr" src="assets/imgs/QRCODE_APOSTA_COMBINADA.PNG">
+</ion-content>

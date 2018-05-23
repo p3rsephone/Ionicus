@@ -154,7 +154,7 @@ export class QrCodePage {
     });
   }
 
-  toggleSC(){
+  /*toggleSC(){
     this.createJSONSC();
     this.navParams.get('storage').get('history').then((val) => {
       var array = val;
@@ -177,7 +177,7 @@ export class QrCodePage {
         name: "Santa Casa"
       });
     });
-  }
+  }*/
 
   toggleEco(){
     this.createJSONEC();
@@ -196,6 +196,66 @@ export class QrCodePage {
       this.navCtrl.push(QrPage, {
         qrData: this.ecooltra,
         name: "eCooltra"
+      });
+    });
+  }
+
+  toggleSCAC(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AC"
+      });
+    });
+  }
+
+  toggleSCAM(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AM"
+      });
+    });
+  }
+
+  toggleSCAS(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AS"
       });
     });
   }

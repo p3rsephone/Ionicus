@@ -17,6 +17,7 @@ collection/
 dist/
 node_modules/
 tmp/
+www/
 temp/
 core/theme-builder/
 core/test-components/

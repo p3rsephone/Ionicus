@@ -27,7 +27,23 @@ export class HomePage {
   photo: any;
   ass: any;
   loading: any;
-  storage: any
+  storage: any;
+  alljson: any;
+  AM: any;
+  A1: any;
+  A2: any;
+  A: any;
+  B1: any;
+  B: any;
+  C1: any;
+  C: any;
+  D1: any;
+  D: any;
+  BE: any;
+  C1E: any;
+  CE: any;
+  D1E: any;
+  DE: any;
 
   constructor(public loadingCtrl: LoadingController, public plt: Platform, public navCtrl: NavController, 
     public sanitizer: DomSanitizer, public navParams: NavParams, private homeService: HomeService, private alertCtrl: AlertController) {
@@ -42,12 +58,24 @@ export class HomePage {
   }
 
   ngOnInit() {
-      this.navParams.get('storage').get('key').then((val) => {
-        this.key= val;
-        this.navParams.get('storage').get('token').then((val2) => {
-          this.token=val2;
-          this.getPosts();
-        });
+    this.navParams.get('storage').get('key').then((val) => {
+      this.key= val;
+      this.navParams.get('storage').get('token').then((val2) => {
+        this.token=val2;
+              this.navParams.get('storage').get('users').then( users =>{if(users){
+                this.loading.present();
+                this.alljson =  users;
+                this.getUser();
+                this.getPhoto();
+                this.getAss();
+                this.indice();
+                this.loading.dismiss();
+              }
+              else{
+                this.getPosts();
+              }
+            });
+          });
       });
   }
 
@@ -91,11 +119,20 @@ export class HomePage {
   getPosts(){
       this.loading.present();
       this.homeService.getPosts(this.key, this.token).subscribe(response => {
-          this.item =response;
+          this.alljson = response;
+          this.storage.set('users', this.alljson);
+          this.getUser();
           this.getPhoto();
           this.getAss();
+          this.indice();
           this.loading.dismiss();
         });
+  }
+
+  getUser(){
+    this.alljson.users.forEach(element => {
+      if((element.secret == this.token) && (element.digital_key == this.key)) this.item=element;
+    });
   }
 
   getPhoto(){
@@ -124,5 +161,29 @@ export class HomePage {
   toggleTF(){
     this.tback=false;
     this.tfront=true;
+  }
+
+  indice(){
+    this.AM = -1;
+    this.A1 = -1;
+    this.A2 = -1;
+    this.A = -1;
+    this.B1 = -1;
+    this.B = -1;
+    this.C1 = -1;
+    this.C = -1;
+    this.D1 = -1;
+    this.D = -1;
+    this.BE = -1;
+    this.C1E = -1;
+    this.CE = -1;
+    this.D1E = -1;
+    this.DE = -1;
+    var number = 0;
+    this.item.types.forEach(element => {
+      if(this.item.types[number]['name']=='B'){
+        this.B = number;
+      }
+    });
   }
 }

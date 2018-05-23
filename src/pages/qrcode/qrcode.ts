@@ -10,6 +10,7 @@ import { QrPage } from '../qr/qr';
 })
 export class QrCodePage {
   items: any;
+  alljson: any;
   output18: any;
   output21: any;
   allinfo: any;
@@ -54,7 +55,7 @@ export class QrCodePage {
 
   infoArray(){
     if(this.items!=undefined){
-      var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/'+ this.key +'","token":"'+this.token+'"}]';
+      var jstr = '[{"site":"http://dev-ionicus.herokuapp.com/users/index/'+ this.key +'","token":"'+this.token+'"}]';
       this.allinfo = jstr;
     }
   }
@@ -153,7 +154,7 @@ export class QrCodePage {
     });
   }
 
-  toggleSC(){
+  /*toggleSC(){
     this.createJSONSC();
     this.navParams.get('storage').get('history').then((val) => {
       var array = val;
@@ -176,7 +177,7 @@ export class QrCodePage {
         name: "Santa Casa"
       });
     });
-  }
+  }*/
 
   toggleEco(){
     this.createJSONEC();
@@ -199,19 +200,94 @@ export class QrCodePage {
     });
   }
 
+  toggleSCAC(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AC"
+      });
+    });
+  }
+
+  toggleSCAM(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AM"
+      });
+    });
+  }
+
+  toggleSCAS(){
+    this.navParams.get('storage').get('history').then((val) => {
+      var array = val;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      var todays;
+      todays = dd + '/' + mm + '/' + yyyy;
+
+      val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date:todays});
+      this.navParams.get('storage').set('history', val);
+
+      this.navCtrl.push(QrPage, {
+        qrData: "",
+        name: "AS"
+      });
+    });
+  }
+
   ngOnInit() {
     this.navParams.get('storage').get('key').then((val) => {
       this.key= val;
       this.navParams.get('storage').get('token').then((val2) => {
         this.token=val2;
-        this.getPosts();
+        this.navParams.get('storage').get('users').then( users =>{
+          if(users){
+            this.alljson =  users;
+            this.getUser();
+          }
+          else{
+            this.getPosts();
+          }
+        });
       });
     });
   }
 
   getPosts(){
     this.homeService.getPosts(this.key, this.token).subscribe(response => {
-        this.items =response;
+        this.alljson =response;
+        this.getUser();
+    });
+  }
+
+  getUser(){
+    this.alljson.users.forEach(element => {
+      if((element.secret == this.token) && (element.digital_key == this.key)) this.items=element;
     });
   }
 }

@@ -5,15 +5,15 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding *ngIf="name!='AM' && name!='AS' && name!='AC'">
+<ion-content padding *ngIf="name!='Aposta Múltipla' && name!='Aposta Simples' && name!='Aposta Combinada'">
   <ngx-qrcode [qrc-value]="qrData"></ngx-qrcode>
 </ion-content>
-<ion-content padding *ngIf="name=='AM'">
+<ion-content padding *ngIf="name=='Aposta Múltipla'">
   <img class="qr" src="assets/imgs/QRCODE_APOSTA_MÚLTIPLA.PNG">
 </ion-content>
-<ion-content padding *ngIf="name=='AS'">
+<ion-content padding *ngIf="name=='Aposta Simples'">
   <img class="qr" src="assets/imgs/QRCODE_APOSTA_SIMPLES.PNG">
 </ion-content>
-<ion-content padding *ngIf="name=='AC'">
+<ion-content padding *ngIf="name=='Aposta Combinada'">
   <img class="qr" src="assets/imgs/QRCODE_APOSTA_COMBINADA.PNG">
 </ion-content>

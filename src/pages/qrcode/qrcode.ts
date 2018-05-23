@@ -1,5 +1,6 @@
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import { HomeService } from '../../app/services/home.service';
 import { QrPage } from '../qr/qr';
@@ -15,12 +16,11 @@ export class QrCodePage {
   output21: any;
   allinfo: any;
   scasa: any;
-  ecooltra: any;
   key: any;
   token: any;
   decision: boolean;
 
-  constructor(public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams, private barcodeScanner: BarcodeScanner, private loading: LoadingController, private alertCtrl: AlertController) {
   }
 
   createJSON18(){
@@ -75,13 +75,6 @@ export class QrCodePage {
     }
   }
 
-  createJSONEC(){
-    if(this.items!=undefined){
-      var jstr = '[{"eCooltra":"alugar"}]';
-      this.ecooltra = jstr;
-    }
-  }
-
   toggleAllInfo(){
     this.infoArray();
     
@@ -93,7 +86,7 @@ export class QrCodePage {
       var yyyy = today.getFullYear();
       var dds, mms, todays;
       todays = dd + '/' + mm + '/' + yyyy;
-      val.unshift({hdr: "Toda a informação", cnt: "Mostrei toda a minha informação.", date: todays});
+      val.unshift({hdr: "Toda a informação", cnt: "Mostrei toda a minha informação ao agente António Gomes Faria, GNR, G-36284.", date: todays});
       this.navParams.get('storage').set('history', val);
 
       this.navCtrl.push(QrPage, {
@@ -119,7 +112,7 @@ export class QrCodePage {
       if (this.decision) bool = " tinha "
       else bool = " não posso "
       
-      val.unshift({hdr: "Maior do que 18 anos", cnt: "Mostrei que"+bool+"mais de 18 anos.", date:todays});
+      val.unshift({hdr: "Maior do que 18 anos", cnt: "Mostrei que"+bool+"mais de 18 anos ao agente António Gomes Faria, GNR, G-36284.", date:todays});
       this.navParams.get('storage').set('history', val);
 
       this.navCtrl.push(QrPage, {
@@ -144,7 +137,7 @@ export class QrCodePage {
       if (this.decision) bool = " tinha "
       else bool = " não posso "
 
-      val.unshift({hdr: "Maior do que 21 anos", cnt: "Mostrei que"+bool+"mais de 21 anos.", date:todays});
+      val.unshift({hdr: "Maior do que 21 anos", cnt: "Mostrei que"+bool+"mais de 21 anos ao agente António Gomes Faria, GNR, G-36284.", date:todays});
       this.navParams.get('storage').set('history', val);
 
       this.navCtrl.push(QrPage, {
@@ -180,7 +173,6 @@ export class QrCodePage {
   }*/
 
   toggleEco(){
-    this.createJSONEC();
     this.navParams.get('storage').get('history').then((val) => {
       var array = val;
       var today = new Date();
@@ -190,14 +182,28 @@ export class QrCodePage {
       var todays;
       todays = dd + '/' + mm + '/' + yyyy;
 
-      val.unshift({hdr: "Alugar na eCooltra", cnt: "Mostrei que posso alugar na eCooltra.", date:todays});
+      val.unshift({hdr: "Alugar na eCooltra", cnt: "Aluguei na eCooltra.", date:todays});
       this.navParams.get('storage').set('history', val);
-
-      this.navCtrl.push(QrPage, {
-        qrData: this.ecooltra,
-        name: "eCooltra"
-      });
     });
+    this.scan();
+  }
+
+  scan() {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      this.popup("eCooltra", "Enviado pedido de desbloqueio.")
+    }, (err) => {
+      this.popup("Erro", "Conteúdo não é uma carta.")
+    })
+  }
+
+  popup(title, sub) {
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: title,
+      subTitle: sub,
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 
   toggleSCAC(){
@@ -215,7 +221,7 @@ export class QrCodePage {
 
       this.navCtrl.push(QrPage, {
         qrData: "",
-        name: "AC"
+        name: "Aposta Combinada"
       });
     });
   }
@@ -235,7 +241,7 @@ export class QrCodePage {
 
       this.navCtrl.push(QrPage, {
         qrData: "",
-        name: "AM"
+        name: "Aposta Múltipla"
       });
     });
   }
@@ -255,7 +261,7 @@ export class QrCodePage {
 
       this.navCtrl.push(QrPage, {
         qrData: "",
-        name: "AS"
+        name: "Aposta Simples"
       });
     });
   }

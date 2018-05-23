@@ -27,9 +27,9 @@ export class MyApp {
         */
       //lockService.init();
       statusBar.styleDefault();
-      let splash = modalCtrl.create(Splash);
-      splash.present();
-      //splashScreen.hide();
+      //let splash = modalCtrl.create(Splash);
+      //splash.present();
+      splashScreen.hide();
     });
   }
 }

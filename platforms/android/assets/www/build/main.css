@@ -33555,28 +33555,85 @@ page-home .imagem2 {
 page-home .imagem3 {
   max-width: 350px;
   margin: auto;
-  width: 90%;
+  width: 50%;
+  height: 130px;
+  margin-left: 30%;
+  margin-top: 15%;
+}
+
+@media only screen and (max-width: 1000px) {
+  page-home .imagem3 {
+    max-width: 350px;
+    margin: auto;
+    width: 50%;
+    height: 120px;
+    margin-left: 30%;
+    margin-top: 20%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  page-home .imagem3 {
+    max-width: 350px;
+    margin: auto;
+    width: 50%;
+    height: 100px;
+    margin-left: 30%;
+    margin-top: 20%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  page-home .imagem3 {
+    max-width: 350px;
+    margin: auto;
+    width: 50%;
+    height: 90px;
+    margin-left: 30%;
+    margin-top: 30%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  page-home .imagem3 {
+    max-width: 350px;
+    margin: auto;
+    width: 50%;
+    height: 80px;
+    margin-left: 30%;
+    margin-top: 40%;
+  }
 }
 
 page-home .row {
+  width: 100%;
+  margin-top: 20px;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 20px;
-  border-radius: 15px;
-  background-color: thistle;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url(../assets/imgs/carta.jpg);
 }
 
 page-home .row2 {
   border-radius: 15px;
-  background-color: thistle;
+  background-color: #f4dbde;
 }
 
 page-home .column {
   margin: auto;
   font-size: 80%;
   float: left;
-  width: 50%;
+  width: 30%;
+}
+
+page-home .column2 {
+  padding: 50px 0 25px 0;
+  margin: auto;
+  font-size: 80%;
+  float: left;
+  width: 70%;
 }
 
 page-home .row:after {
@@ -33590,9 +33647,21 @@ page-home .back {
   padding: 10px;
 }
 
-page-home table, page-home th, page-home td {
+page-home table {
+  border: none;
+  margin: auto 10px auto auto;
+  width: 80%;
+}
+
+page-home th {
+  border: none;
+  margin: auto;
+}
+
+page-home td {
   border: 1px solid black;
   border-collapse: collapse;
+  border-style: solid;
   margin: auto;
   padding: 5px;
 }
@@ -33621,6 +33690,15 @@ ion-content {
 /*h4 {
 	color: #c5dbff;
 }*/
+qr ion-content {
+  background: #ffffff;
+}
+
+qr img {
+  height: 100%;
+  width: 100%;
+}
+
 qrcode ion-content {
   background: #ffffff;
 }

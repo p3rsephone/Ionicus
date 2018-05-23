@@ -62,8 +62,7 @@ export class HomePage {
       this.key= val;
       this.navParams.get('storage').get('token').then((val2) => {
         this.token=val2;
-              this.navParams.get('storage').get('users').then( users =>{
-              if(users){
+              this.navParams.get('storage').get('users').then( users =>{if(users){
                 this.loading.present();
                 this.alljson =  users;
                 this.getUser();

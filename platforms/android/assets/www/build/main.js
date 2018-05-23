@@ -577,30 +577,30 @@ var QrCodePage = /** @class */ (function () {
             });
         });
     };
-    QrCodePage.prototype.toggleSC = function () {
-        var _this = this;
-        this.createJSONSC();
-        this.navParams.get('storage').get('history').then(function (val) {
-            var array = val;
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            var todays;
-            todays = dd + '/' + mm + '/' + yyyy;
-            var bool;
-            if (_this.decision)
-                bool = " posso ";
-            else
-                bool = " não posso ";
-            val.unshift({ hdr: "Jogar na Santa Casa", cnt: "Mostrei que" + bool + "jogar na Santa Casa.", date: todays });
-            _this.navParams.get('storage').set('history', val);
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__qr_qr__["a" /* QrPage */], {
-                qrData: _this.scasa,
-                name: "Santa Casa"
-            });
+    /*toggleSC(){
+      this.createJSONSC();
+      this.navParams.get('storage').get('history').then((val) => {
+        var array = val;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var todays;
+        todays = dd + '/' + mm + '/' + yyyy;
+        var bool;
+  
+        if (this.decision) bool = " posso "
+        else bool = " não posso "
+  
+        val.unshift({hdr: "Jogar na Santa Casa", cnt: "Mostrei que"+bool+"jogar na Santa Casa.", date:todays});
+        this.navParams.get('storage').set('history', val);
+  
+        this.navCtrl.push(QrPage, {
+          qrData: this.scasa,
+          name: "Santa Casa"
         });
-    };
+      });
+    }*/
     QrCodePage.prototype.toggleEco = function () {
         var _this = this;
         this.createJSONEC();
@@ -617,6 +617,60 @@ var QrCodePage = /** @class */ (function () {
             _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__qr_qr__["a" /* QrPage */], {
                 qrData: _this.ecooltra,
                 name: "eCooltra"
+            });
+        });
+    };
+    QrCodePage.prototype.toggleSCAC = function () {
+        var _this = this;
+        this.navParams.get('storage').get('history').then(function (val) {
+            var array = val;
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var todays;
+            todays = dd + '/' + mm + '/' + yyyy;
+            val.unshift({ hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date: todays });
+            _this.navParams.get('storage').set('history', val);
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__qr_qr__["a" /* QrPage */], {
+                qrData: "",
+                name: "AC"
+            });
+        });
+    };
+    QrCodePage.prototype.toggleSCAM = function () {
+        var _this = this;
+        this.navParams.get('storage').get('history').then(function (val) {
+            var array = val;
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var todays;
+            todays = dd + '/' + mm + '/' + yyyy;
+            val.unshift({ hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date: todays });
+            _this.navParams.get('storage').set('history', val);
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__qr_qr__["a" /* QrPage */], {
+                qrData: "",
+                name: "AM"
+            });
+        });
+    };
+    QrCodePage.prototype.toggleSCAS = function () {
+        var _this = this;
+        this.navParams.get('storage').get('history').then(function (val) {
+            var array = val;
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var todays;
+            todays = dd + '/' + mm + '/' + yyyy;
+            val.unshift({ hdr: "Jogar na Santa Casa", cnt: "Mostrei que posso jogar na Santa Casa.", date: todays });
+            _this.navParams.get('storage').set('history', val);
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__qr_qr__["a" /* QrPage */], {
+                qrData: "",
+                name: "AS"
             });
         });
     };
@@ -654,7 +708,7 @@ var QrCodePage = /** @class */ (function () {
     };
     QrCodePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'qrcode',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          QR\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <div class="card">\n      <button (click)="toggleAllInfo()" ion-button block style="background-color: #ffffff; color: #000000">Partilhar toda a informação</button>\n    </div>\n    <div class="card">\n      <button (click)="toggle18()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 18</button>\n    </div>\n    <div class="card">\n      <button (click)="toggle21()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 21</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleEco()" ion-button block style="background-color: #ffffff; color: #000000">Alugar Scooter</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleSC()" ion-button block style="background-color: #ffffff; color: #000000">Jogar na Santa Casa</button>\n    </div>\n  </ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/
+            selector: 'qrcode',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/'<ion-header>\n    <ion-navbar color="favorite">\n      <ion-title text-center>\n          QR\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <div class="card">\n      <button (click)="toggleAllInfo()" ion-button block style="background-color: #ffffff; color: #000000">Partilhar toda a informação</button>\n    </div>\n    <div class="card">\n      <button (click)="toggle18()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 18</button>\n    </div>\n    <div class="card">\n      <button (click)="toggle21()" ion-button block style="background-color: #ffffff; color: #000000">Sou maior de 21</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleEco()" ion-button block style="background-color: #ffffff; color: #000000">Alugar Scooter</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleSCAS()" ion-button block style="background-color: #ffffff; color: #000000">Santa Casa(Aposta Simples)</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleSCAC()" ion-button block style="background-color: #ffffff; color: #000000">Santa Casa(Aposta Combinada)</button>\n    </div>\n    <div class="card">\n      <button (click)="toggleSCAM()" ion-button block style="background-color: #ffffff; color: #000000">Santa Casa(Aposta Múltipla)</button>\n    </div>\n  </ion-content>\n  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qrcode/qrcode.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_services_home_service__["a" /* HomeService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], QrCodePage);
@@ -695,7 +749,7 @@ var QrPage = /** @class */ (function () {
     };
     QrPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'qr',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qr/qr.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n        {{name}}\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ngx-qrcode [qrc-value]="qrData"></ngx-qrcode>\n</ion-content>  '/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qr/qr.html"*/
+            selector: 'qr',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qr/qr.html"*/'<ion-header>\n  <ion-navbar color="favorite">\n    <ion-title text-center>\n        {{name}}\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding *ngIf="name!=\'AM\' && name!=\'AS\' && name!=\'AC\'">\n  <ngx-qrcode [qrc-value]="qrData"></ngx-qrcode>\n</ion-content>\n<ion-content padding *ngIf="name==\'AM\'">\n  <img class="qr" src="assets/imgs/QRCODE_APOSTA_MÚLTIPLA.PNG">\n</ion-content>\n<ion-content padding *ngIf="name==\'AS\'">\n  <img class="qr" src="assets/imgs/QRCODE_APOSTA_SIMPLES.PNG">\n</ion-content>\n<ion-content padding *ngIf="name==\'AC\'">\n  <img class="qr" src="assets/imgs/QRCODE_APOSTA_COMBINADA.PNG">\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/qr/qr.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
     ], QrPage);
@@ -974,7 +1028,7 @@ var Splash = /** @class */ (function () {
     };
     Splash = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-splash',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/splash/splash.html"*/'<ion-content>\n    <table>\n        <tr><img src="assets/imgs/imt.png"></tr>\n        <tr><img src="assets/imgs/incm.png"></tr>\n        <tr><img src="assets/imgs/uminho.png"></tr>\n        <tr><img src="assets/imgs/unu-egov.png"></tr>\n    </table>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/splash/splash.html"*/,
+            selector: 'page-splash',template:/*ion-inline-start:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/splash/splash.html"*/'<ion-content>\n    <table>\n        <tr style="text-align: center; font-size: 15px"><b>Main Sponser</b></tr>\n        <tr><img src="assets/imgs/imt.png"></tr>\n        <tr style="text-align: center; font-size: 10px">Other entities</tr>\n        <tr><img src="assets/imgs/incm.png"></tr>\n        <tr><img src="assets/imgs/uminho.png"></tr>\n        <tr><img src="assets/imgs/unu-egov.png"></tr>\n        <tr><img src="assets/imgs/santa.png"></tr>\n        <tr><img src="assets/imgs/ecooltra.png"></tr>\n    </table>\n</ion-content>'/*ion-inline-end:"/home/asac/Desktop/asac/Experiments/ionic/Ionicus/src/pages/splash/splash.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], Splash);
@@ -1407,7 +1461,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HomeService = /** @class */ (function () {
     function HomeService(http) {
         this.http = http;
-        this.baseUrl = '10.0.2.145:3000/';
+        this.baseUrl = 'http://dev-ionicus.herokuapp.com/';
     }
     HomeService.prototype.getPosts = function (key, token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();

@@ -1,7 +1,7 @@
 import { KeyPage } from './../key/key';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { PincodeController } from "ionic2-pincode-input/dist";
+import { PincodeController } from "ionic2-pincode-input";
 import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
 
 import CryptoJS from 'crypto-js';

@@ -6,6 +6,8 @@ import { HomeService } from './services/home.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   templateUrl: 'app.html',
@@ -14,7 +16,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any= LockScreenPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
+  constructor(platform: Platform, storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
     platform.ready().then(() => {
       /*
         if (PIN) {

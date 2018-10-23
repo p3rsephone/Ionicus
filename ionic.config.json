@@ -1,11 +1,10 @@
 {
   "name": "auth",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {},
     "gulp": {}
   },
+  "type": "ionic-angular",
   "gulp": {
     "enabled": false
   }

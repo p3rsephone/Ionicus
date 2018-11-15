@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { NavParams } from 'ionic-angular';
+import { NavParams, AlertController } from 'ionic-angular';
 import { HomeService } from '../../app/services/home.service';
 import { QrPage } from '../qr/qr';
+import {Platform} from 'ionic-angular';
+import { BarcodeScanner} from '@ionic-native/barcode-scanner';
 
 @Component({
   selector: 'qrcode',
@@ -20,7 +22,7 @@ export class QrCodePage {
   token: any;
   decision: boolean;
 
-  constructor(public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams) {
+  constructor(public platform: Platform, private alertCtrl: AlertController, public navCtrl: NavController, private homeService: HomeService, private navParams: NavParams, private barcodeScanner: BarcodeScanner) {
   }
 
   createJSON18(){
@@ -180,7 +182,7 @@ export class QrCodePage {
   }*/
 
   toggleEco(){
-    this.createJSONEC();
+    /*this.createJSONEC();
     this.navParams.get('storage').get('history').then((val) => {
       var array = val;
       var today = new Date();
@@ -197,7 +199,19 @@ export class QrCodePage {
         qrData: this.ecooltra,
         name: "eCooltra"
       });
-    });
+    });*/
+    this.platform.ready().then(() => {
+      this.barcodeScanner.scan().then((barcodeData) => {
+        
+      }, (err) => {
+        let alert = this.alertCtrl.create({
+          title: 'Erro',
+          subTitle: err,
+          buttons: ['Ok']
+        });
+        alert.present();
+      })
+    })
   }
 
   toggleSCAC(){
